@@ -331,7 +331,7 @@ void RunPROOF_test(double luminosity,
 
   //  TString path = Form("rootfiles/%djet/%s/", JetChannel, FlavorChannel.Data());
 
-  TString output = TString("rootFiles/"+FlavorChannel+"/"+jets+"jets/"+FlavorChannel+"/csa15_"+theSample+".root");
+  TString output = TString("csa15_"+theSample+".root");
 
 
 
