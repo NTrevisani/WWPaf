@@ -4,13 +4,13 @@ WARNING: VERY EARLY VERSION!!
 
 To run type: 
 
-./run.sh 0
+./run.sh "njets"
 
-./run.sh 1
+where njets = 0,1,2
 
-./run.sh 2
+root files are stored in rootFiles/"njets"jets/channel
 
-root files are stored in rootFiles/
+where channel indicates the decay channel (EE,EMu,MuE,SF,OF,All)
 
 the analysis is carried on in:
 
