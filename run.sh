@@ -47,6 +47,7 @@ for CHANNEL in $CHANNELS; do
 	mkdir rootFiles/${NJETS}jets/
 	mkdir rootFiles/${NJETS}jets/${CHANNEL}	
 	root -l -b -q "RunPROOF_test.C($LUMINOSITY,\"$TEST\",\"$SAMPLE\","$NJETS",\"$CHANNEL\")"
+	mv csa15_${SAMPLE}.root rootFiles/${NJETS}jets/${CHANNEL}
   
     done
 
