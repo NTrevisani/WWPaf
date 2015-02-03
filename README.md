@@ -6,7 +6,7 @@ To run type:
 
 ./run.sh "njets"
 
-where njets = 0,1,2
+where "njets" = 0,1,2
 
 root files are stored in rootFiles/"njets"jets/"channel"
 
