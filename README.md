@@ -8,9 +8,9 @@ To run type:
 
 where njets = 0,1,2
 
-root files are stored in rootFiles/"njets"jets/channel
+root files are stored in rootFiles/"njets"jets/"channel"
 
-where channel indicates the decay channel (EE,EMu,MuE,SF,OF,All)
+where "channel" indicates the decay channel (EE,EMu,MuE,SF,OF,All)
 
 the analysis is carried on in:
 
