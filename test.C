@@ -42,6 +42,7 @@ void test::Initialise() {
   TString TheSample = GetInputParameters()->TheNamedString("theSample");
   TString flavorChannel = GetInputParameters()->TheNamedString("FlavorChannel");
 
+
  // To do only once
 
   float LuminosityPU = 0;
@@ -50,7 +51,7 @@ void test::Initialise() {
 
   // Set the channel                                                                                                                                                               
   //----------------------------------------------------------------------------                                                                                                   
-  Float_t SelectedChannel = -999;
+  SelectedChannel = -999;
 
   if      (flavorChannel == "MuMu") SelectedChannel =  0;
   else if (flavorChannel == "EE"  ) SelectedChannel =  1;
@@ -239,7 +240,6 @@ void test::InsideLoop() {
     //5812.3/1933235; // madgraph (1933232)
     // 5812.3/999864; // powheg (999860)
 
-
     if (TheSample.Contains("Data"))
       totalW = 1.0;
 
@@ -297,18 +297,24 @@ void test::InsideLoop() {
 	  if (pt2 >= 20) //increase the pt of the leptons to further reduce Wjets 
 	    if (pt1 >= 20) //increase the pt of the leptons to further reduce Wjets 
 	      if (ch1*ch2 < 0)
-    {
+		if ( (SelectedChannel == -1)                                   || 
+		     (channel == SelectedChannel)                              || 
+		     (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
+		     (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
+		     )//chooses the right decay channel 
+		  {
+
      
     // if (dataset == 86 && (flavorChannel == "MuMu" || flavorChannel == "EE")) continue; 
     // After talking Andrea's just removing this condition!! 
-      /*
+		    /*
     if ( (SelectedChannel == -1)                                   || 
 	 (channel == SelectedChannel)                              || 
 	 (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
 	 (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
-	 ) {
-     
-      */
+	 ) 
+		    */
+      
       
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       //

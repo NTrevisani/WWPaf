@@ -37,6 +37,7 @@ Double_t DYMVACut_1j[numberDYMVACuts] = {-0.9, -0.86, -0.6, 0.84, 1000};
 Bool_t runAtOviedo = false;
 Bool_t runAtIfca   = !runAtOviedo;
 
+Float_t SelectedChannel;
 
 class test: public PAFAnalysis{
 
