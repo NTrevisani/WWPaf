@@ -155,19 +155,19 @@ void RunPROOF_test(double luminosity,
 
   else if (theSample == "ggWWto2L") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_001_GluGluToWWTo4L.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_001_GluGluToWWTo4L.root");
 
   }
 
   else if (theSample == "WWTo2L2Nu") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_000_WWJets2LMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_000_WWJets2LMad.root");
 
   }
 
   else if (theSample == "WWTo2L2Nu_pow") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_006_WWJets2LPowheg.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_006_WWJets2LPowheg.root");
 
   }
 
@@ -179,7 +179,7 @@ void RunPROOF_test(double luminosity,
 
  else if (theSample == "WWTo2L2Nu_mcnlo") {
 
-   gPAFOptions->dataFiles.push_back(filesPath + "latino_002_WWto2L2NuMCatNLO.root");
+   gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_002_WWto2L2NuMCatNLO.root");
   }
 
  else if (theSample == "WWTo2L2Nu_mcnlo_nnll") {
@@ -201,42 +201,42 @@ void RunPROOF_test(double luminosity,
 
  else if (theSample == "WZ") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_074_WZJetsMad.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_078_WZTo2L2QMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_074_WZJetsMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_078_WZTo2L2QMad.root");
 
   }
 
   else if (theSample == "ZZ") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_075_ZZJetsMad.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_079_ZZTo2L2QMad.root"); 
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_075_ZZJetsMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_079_ZZTo2L2QMad.root"); 
 
   }
 
   else if (theSample == "TTbar") {
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_019_TTTo2L2Nu2B.root"); 
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_019_TTTo2L2Nu2B.root"); 
 
   }
 
   else if (theSample == "TW") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_011_TtWFullDR.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_012_TbartWFullDR.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_011_TtWFullDR.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_012_TbartWFullDR.root");
 
   }
 
   else if (theSample == "Top") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_019run_TTTo2L2Nu2B.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_011_TtWFullDR.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_012_TbartWFullDR.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_019run_TTTo2L2Nu2B.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_011_TtWFullDR.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_012_TbartWFullDR.root");
 
   }
 
   else if (theSample == "DY") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_036_DY10toLLMad.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_037_DY50toLLMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_036_DY10toLLMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_037_DY50toLLMad.root");
 
   }
 
@@ -248,35 +248,35 @@ void RunPROOF_test(double luminosity,
 
   else if (theSample == "Zgamma") { 
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_086_ZgammaToLLuG.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_086_ZgammaToLLuG.root");
 
   }
 
   else if (theSample == "WgammaNoStar") {
 
-        gPAFOptions->dataFiles.push_back(filesPath + "latino_085_WgammaToLNuG.root");
+        gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_085_WgammaToLNuG.root");
 
   }
 
   else if (theSample == "WgammaStar") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_082_WGstarToElNuMad.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_083_WGstarToMuNuMad.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_084_WGstarToTauNuMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_082_WGstarToElNuMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_083_WGstarToMuNuMad.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_084_WGstarToTauNuMad.root");
 
   }
 
   else if (theSample == "HWW125") { 
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_1125_ggToH125toWWTo2LAndTau2Nu.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_2125_vbfToH125toWWTo2LAndTau2Nu.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_3125_wzttH125ToWW.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_1125_ggToH125toWWTo2LAndTau2Nu.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_2125_vbfToH125toWWTo2LAndTau2Nu.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_3125_wzttH125ToWW.root");
 
   }
 
   else if (theSample =="GamGamWW"){
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_008_GamGamWW.root");    
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_008_GamGamWW.root");    
 
   }
 
@@ -288,15 +288,15 @@ void RunPROOF_test(double luminosity,
 
   else if (theSample == "VVV") {
 
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_088_WWGJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_089_WZZJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_090_ZZZJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_091_WWZJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_092_WWWJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_093_TTWJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_094_TTZJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_095_TTWWJets.root");
-    gPAFOptions->dataFiles.push_back(filesPath + "latino_096_TTGJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_088_WWGJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_089_WZZJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_090_ZZZJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_091_WWZJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_092_WWWJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_093_TTWJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_094_TTZJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_095_TTWWJets.root");
+    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_096_TTGJets.root");
 
   }
   else {
@@ -331,7 +331,7 @@ void RunPROOF_test(double luminosity,
 
   //  TString path = Form("rootfiles/%djet/%s/", JetChannel, FlavorChannel.Data());
 
-  TString output = TString("csa15_"+theSample+".root");
+  TString output = TString(theSample+".root");
 
 
 
