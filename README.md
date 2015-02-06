@@ -2,6 +2,9 @@
 
 WARNING: VERY EARLY VERSION!!
 
+git clone https://github.com/NTrevisani/WWPaf.git WWPaf
+cd WWPaf
+
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  This code runs on gridui.ifca.es with the following setup for root and PROOF:
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
