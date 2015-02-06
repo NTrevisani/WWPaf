@@ -29,11 +29,11 @@ export PATH=$PAFPATH/bin:$PATH
 ./run.sh "njets"
 
 where "njets" = 0,1,2
-
-root files are stored in rootFiles/"njets"jets/"channel"
-
-where "channel" indicates the decay channel (EE,EMu,MuE,SF,OF,All)
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ root files are stored in rootFiles/"njets"jets/"channel"
+
+ where "channel" indicates the decay channel (EE,EMu,MuE,SF,OF,All)
 
  the analysis is carried on in:
 
