@@ -2,6 +2,18 @@
 
 WARNING: VERY EARLY VERSION!!
 
+This code runs on gridui.ifca.es
+with the following setup for root and PROOF:
+
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+source /gpfs/csic_projects/cms/sw/ROOT/current/root/bin/thisroot.sh
+
+export PYTHONPATH=$PYTHONPATH:/opt/glite/lib
+
+export PAFPATH=/gpfs/csic_projects/cms/PROOF/paf/
+export PATH=$PAFPATH/bin:$PATH
+
+
 To run type: 
 
 ./run.sh "njets"
