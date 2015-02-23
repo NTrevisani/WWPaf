@@ -212,7 +212,7 @@ void test::Initialise() {
 
 void test::InsideLoop() {
  
-
+  TString TheSample = GetInputParameters()->TheNamedString("theSample");
   h_n_PV -> Fill(zveto);
 
  // The InsideLoop() function is called for each entry in the tree to be processed  
