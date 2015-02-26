@@ -38,49 +38,56 @@ void test::Initialise() {
   GetInputParameters()->TheNamedDouble("XSection", XSection);
   GetInputParameters()->TheNamedInt("WhichRun", WhichRun);
   GetInputParameters()->TheNamedInt("jetChannel", jetChannel);
- 
+  
   TString TheSample = GetInputParameters()->TheNamedString("theSample");
   TString flavorChannel = GetInputParameters()->TheNamedString("FlavorChannel");
-
-
- // To do only once
-
+  
+  cout<<"la stringa che voglio passare si chiama: "<<TheSample<<endl;
+  
+  
+  // To do only once
+  
   float LuminosityPU = 0;
   //fInputParameters->TheNamedFloat("LuminosityPU",LuminosityPU);
   //fPUWeight = new PUWeight(LuminosityPU, Spring11);//Summer11InTime);
-
+  
   // Set the channel                                                                                                                                                               
   //----------------------------------------------------------------------------                                                                                                   
   SelectedChannel = -999;
-
+  
   if      (flavorChannel == "MuMu") SelectedChannel =  0;
   else if (flavorChannel == "EE"  ) SelectedChannel =  1;
   else if (flavorChannel == "EMu" ) SelectedChannel =  2;
   else if (flavorChannel == "MuE" ) SelectedChannel =  3;
   else if (flavorChannel == "OF" )  SelectedChannel =  4;
   else if (flavorChannel == "SF" )  SelectedChannel =  5;
-
+  
   else if (flavorChannel == "All" ) SelectedChannel = -1;
-
-
+  
+  
   G_Debug_DefineAnalysisVariables = false;
 
- 
-//------------------------------------------------------------------------------
-// Create histos
-//------------------------------------------------------------------------------
-
+  
+  //------------------------------------------------------------------------------
+  // Create histos
+  //------------------------------------------------------------------------------
+  
   h_n_PV = CreateH1F("h_n_PV","h_n_PV",10,-5.,5.);
 
   // Counting histograms    
   //---------------------------------------------------------------------------- 
-                                                               
+  
   hWTrigger     = CreateH1F("hWTrigger",     "", 3, 0, 3);
   hWMetCut      = CreateH1F("hWMetCut",      "", 3, 0, 3);
   hWLowMinv     = CreateH1F("hWLowMinv",     "", 3, 0, 3);
   hWZVeto       = CreateH1F("hWZVeto",       "", 3, 0, 3);
   hWpMetCut     = CreateH1F("hWpMetCut",     "", 3, 0, 3);
   hWJetVeto     = CreateH1F("hWJetVeto",     "", 3, 0, 3);
+  hWnJetsBeforeBtag    = CreateH1F("hWnJetsBeforeBtag",         "", 3, 0, 3);
+  hWeffnJetsBeforeBtag = CreateH1F("hWeffnJetsBeforeBtag",      "", 3, 0, 3);
+  hWnJetsAfterBtag     = CreateH1F("hWnJetsAfterBtag",          "", 3, 0, 3);
+  hWeffnJetsAfterBtag  = CreateH1F("hWeffnJetsAfterBtag",       "", 3, 0, 3);
+  
   hWDeltaPhiJet = CreateH1F("hWDeltaPhiJet", "", 3, 0, 3);
   hWSoftMuVeto  = CreateH1F("hWSoftMuVeto",  "", 3, 0, 3);
   hWExtraLepton = CreateH1F("hWExtraLepton", "", 3, 0, 3);
@@ -98,33 +105,38 @@ void test::Initialise() {
   hWeffExtraLepton = CreateH1F("hWeffExtraLepton", "", 3, 0, 3);
   hWeffPtll        = CreateH1F("hWeffPtll",        "", 3, 0, 3);
   hWeffTopTagging  = CreateH1F("hWeffTopTagging",  "", 3, 0, 3);
-
+  
   // WW level histograms     
   //----------------------------------------------------------------------------  
+  
+  for (Int_t nC=0; nC<3; nC++) {
+    //    hNinZevents     [nC] = CreateH1F(Form("hNinZevents%.1i",      nC+1 ), "",   3, 0,   3);
+    hPtLepton1WWLevel[nC]       = CreateH1F(Form("hPtLepton1WWLevel%.1i", nC),       "", 200, 0, 200);
+    hPtLepton2WWLevel[nC]       = CreateH1F(Form("hPtLepton2WWLevel%.1i", nC),       "", 200, 0, 200);
+    hPtDiLeptonWWLevel[nC]      = CreateH1F(Form("hPtDiLeptonWWLevel%.1i", nC),      "", 200, 0, 200);
+    hMinvWWLevel[nC]            = CreateH1F(Form("hMinvWWLevel%.1i", nC),            "", 200, 0, 200);
+    hMtWWLevel[nC]              = CreateH1F(Form("hMtWWLevel%.1i", nC),              "", 250, 0, 250);
+    hNJets30WWLevel[nC]         = CreateH1F(Form("hNJetsPF30WWLevel%.1i", nC),       "",  10, 0,  10);
+    hpfMetWWLevel[nC]           = CreateH1F(Form("hpfMetWWLevel%.1i", nC),           "", 150, 0, 150);
+    hppfMetWWLevel[nC]          = CreateH1F(Form("hppfMetWWLevel%.1i", nC),          "", 150, 0, 150);
+    hchMetWWLevel[nC]           = CreateH1F(Form("hchMetWWLevel%.1i", nC),           "", 150, 0, 150);
+    hpchMetWWLevel[nC]          = CreateH1F(Form("hpchMetWWLevel%.1i", nC),          "", 150, 0, 150);
+    hpminMetWWLevel[nC]         = CreateH1F(Form("hpminMetWWLevel%.1i", nC),         "", 150, 0, 150);
+    hDeltaRLeptonsWWLevel[nC]   = CreateH1F(Form("hDeltaRLeptonsWWLevel%.1i", nC),   "",  50, 0,   5);
+    hDeltaPhiLeptonsWWLevel[nC] = CreateH1F(Form("hDeltaPhiLeptonsWWLevel%.1i", nC), "",  32, 0, 3.2);
+    hDPhiPtllJetWWLevel[nC]     = CreateH1F(Form("hDPhiPtllJetWWLevel%.1i", nC),     "",  32, 0, 3.2);
+    hDataEvents[nC]             = CreateH1F(Form("hDataEvents%.1i", nC),             "",  32, 0, 3.2);
+    hBackgroundEvents[nC]       = CreateH1F(Form("hBackgroundEvents%.1i", nC),       "",  32, 0, 3.2);
+  }
 
-  hPtLepton1WWLevel       = CreateH1F("hPtLepton1WWLevel",       "", 200, 0, 200);
-  hPtLepton2WWLevel       = CreateH1F("hPtLepton2WWLevel",       "", 200, 0, 200);
-  hPtDiLeptonWWLevel      = CreateH1F("hPtDiLeptonWWLevel",      "", 200, 0, 200);
-  hMinvWWLevel            = CreateH1F("hMinvWWLevel",            "", 200, 0, 200);
-  hMtWWLevel              = CreateH1F("hMtWWLevel",              "", 250, 0, 250);
-  hNJets30WWLevel         = CreateH1F("hNJetsPF30WWLevel",       "",  10, 0,  10);
-  hpfMetWWLevel           = CreateH1F("hpfMetWWLevel",           "", 150, 0, 150);
-  hppfMetWWLevel          = CreateH1F("hppfMetWWLevel",          "", 150, 0, 150);
-  hchMetWWLevel           = CreateH1F("hchMetWWLevel",           "", 150, 0, 150);
-  hpchMetWWLevel          = CreateH1F("hpchMetWWLevel",          "", 150, 0, 150);
-  hpminMetWWLevel         = CreateH1F("hpminMetWWLevel",         "", 150, 0, 150);
-  hDeltaRLeptonsWWLevel   = CreateH1F("hDeltaRLeptonsWWLevel",   "",  50, 0,   5);
-  hDeltaPhiLeptonsWWLevel = CreateH1F("hDeltaPhiLeptonsWWLevel", "",  32, 0, 3.2);
-  hDPhiPtllJetWWLevel     = CreateH1F("hDPhiPtllJetWWLevel",     "",  32, 0, 3.2);
-
-  h_WWLevel_TightFailEvents = CreateH1F("h_WWLevel_TightFailEvents", "", 3, 0 , 3);
+  h_WWLevel_TightFailEvents  = CreateH1F("h_WWLevel_TightFailEvents",  "", 3, 0 , 3);
   h_WWLevel_TightTightEvents = CreateH1F("h_WWLevel_TightTightEvents", "", 3, 0 , 3);
   h_WWLevel_TightLooseEvents = CreateH1F("h_WWLevel_TightLooseEvents", "", 3, 0 , 3);
-
-
+  
+  
   // TwoLeptons level histograms   
   //----------------------------------------------------------------------------
-
+  
   hPtLepton1TwoLeptonsLevel       = CreateH1F("hPtLepton1TwoLeptonsLevel",       "", 200, 0, 200);
   hPtLepton2TwoLeptonsLevel       = CreateH1F("hPtLepton2TwoLeptonsLevel",       "", 200, 0, 200);
   hPtDiLeptonTwoLeptonsLevel      = CreateH1F("hPtDiLeptonTwoLeptonsLevel",      "", 200, 0, 200);
@@ -139,52 +151,47 @@ void test::Initialise() {
   hDeltaRLeptonsTwoLeptonsLevel   = CreateH1F("hDeltaRLeptonsTwoLeptonsLevel",   "",  50, 0,   5);
   hDeltaPhiLeptonsTwoLeptonsLevel = CreateH1F("hDeltaPhiLeptonsTwoLeptonsLevel", "",  32, 0, 3.2);
   hDPhiPtllJetTwoLeptonsLevel     = CreateH1F("hDPhiPtllJetTwoLeptonsLevel",     "",  32, 0, 3.2);
-
-  h_TwoLeptons_TightFailEvents = CreateH1F("h_TwoLeptons_TightFailEvents", "", 3, 0 , 3);
+  
+  h_TwoLeptons_TightFailEvents  = CreateH1F("h_TwoLeptons_TightFailEvents",  "", 3, 0 , 3);
   h_TwoLeptons_TightTightEvents = CreateH1F("h_TwoLeptons_TightTightEvents", "", 3, 0 , 3);
   h_TwoLeptons_TightLooseEvents = CreateH1F("h_TwoLeptons_TightLooseEvents", "", 3, 0 , 3);
-
-
+  
   // Dilepton level differential histograms 
   //----------------------------------------------------------------------------   
-
+  
   //differential in dilepton (eta, pt, ptll, mll, dphill), jets (jetpt1, njet), transverse mass? 2-jet bin?   
-
+  
   Double_t pt1bins[8] = {20,40,60,80,100,125,150,200};
   Double_t eta1bins[9] = {-2.4,-1.8,-1.2,-0.6,0,0.6,1.2,1.8,2.4};
   Double_t mllbins[9] = {20,40,60,80,100,125,150,175,200};
   Double_t dphibins[13] = {0,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3};
   Double_t ptllbins[8] = {30,40,50,60,70,85,120,150};
-
-  hPtLepton1DilepLevel_Diff  = CreateH1F("hPtLepton1DilepLevel_Diff",       "", 7, pt1bins);
+  
+  hPtLepton1DilepLevel_Diff   = CreateH1F("hPtLepton1DilepLevel_Diff",        "", 7, pt1bins);
   hEtaLepton1DilepLevel_Diff  = CreateH1F("hEtaLepton1DilepLevel_Diff",       "", 8, eta1bins);
-  hDileptonDilepLevel_Diff  = CreateH1F("hDileptonDilepLevel_Diff",       "", 7, ptllbins);
-  hMinvDilepLevel_Diff  = CreateH1F("hMinvDilepLevel_Diff",       "", 8, mllbins);
-  hDeltaPhiDilepLevel_Diff  = CreateH1F("hDeltaPhiDilepLevel_Diff",       "", 12, dphibins);
-
-
+  hDileptonDilepLevel_Diff    = CreateH1F("hDileptonDilepLevel_Diff",         "", 7, ptllbins);
+  hMinvDilepLevel_Diff        = CreateH1F("hMinvDilepLevel_Diff",             "", 8, mllbins);
+  hDeltaPhiDilepLevel_Diff    = CreateH1F("hDeltaPhiDilepLevel_Diff",         "", 12, dphibins);
+  
   // WW level differential histograms    
   //----------------------------------------------------------------------------
-
-  hPtLepton1WWLevel_Diff  = CreateH1F("hPtLepton1WWLevel_Diff",       "",7, pt1bins);
+  
+  hPtLepton1WWLevel_Diff   = CreateH1F("hPtLepton1WWLevel_Diff",        "", 7, pt1bins);
   hEtaLepton1WWLevel_Diff  = CreateH1F("hEtaLepton1WWLevel_Diff",       "", 8, eta1bins);
-  hDileptonWWLevel_Diff  = CreateH1F("hDileptonWWLevel_Diff",       "", 7, ptllbins);
-  hMinvWWLevel_Diff  = CreateH1F("hMinvWWLevel_Diff",       "", 8, mllbins);
-  hDeltaPhiWWLevel_Diff  = CreateH1F("hDeltaPhiWWLevel_Diff",       "", 12, dphibins);
-
-
-
-
+  hDileptonWWLevel_Diff    = CreateH1F("hDileptonWWLevel_Diff",         "", 7, ptllbins);
+  hMinvWWLevel_Diff        = CreateH1F("hMinvWWLevel_Diff",             "", 8, mllbins);
+  hDeltaPhiWWLevel_Diff    = CreateH1F("hDeltaPhiWWLevel_Diff",         "", 12, dphibins);
+  
   // Data-driven methods: Z+jets 
   //---------------------------------------------------------------------------- 
-
+  
   /*   
   hNinZevents     [numberDYMVACuts];
   hNoutZevents    [numberDYMVACuts];
   hNinLooseZevents[numberDYMVACuts];
   hMassInZevents  [numberDYMVACuts];
   hMassOutZevents [numberDYMVACuts];
-*/
+  */
 
   for (Int_t nC=0; nC<numberDYMVACuts; nC++) {
     hNinZevents     [nC] = CreateH1F(Form("hNinZevents%.1i",      nC+1 ), "",   3, 0,   3);
@@ -192,105 +199,96 @@ void test::Initialise() {
     hNinLooseZevents[nC] = CreateH1F(Form("hNinLooseZevents%.1i", nC+1 ), "",   3, 0,   3);
     hMassInZevents  [nC] = CreateH1F(Form("hMassInZevents%.1i",   nC+1 ), "", 200, 0, 200);
     hMassOutZevents [nC] = CreateH1F(Form("hMassOutZevents%.1i",  nC+1 ), "", 200, 0, 200);
+  }
+  
+  // Data-driven methods: Top                                                                                                                                                      
+  //----------------------------------------------------------------------------                                                                                                   
+  hTopTaggedEvents            = CreateH1F("hTopTaggedEvents",            "", 3, 0, 3);
+  hNTopControlRegion          = CreateH1F("hNTopControlRegion",          "", 3, 0, 3);
+  hNTopTaggedTopControlRegion = CreateH1F("hNTopTaggedTopControlRegion", "", 3, 0, 3);
+  
+  hbTagDisTopTaggedEvents            = CreateH1F("hbTagDisTopTaggedEvents",            "", 300, -10, 20);
+  hbTagDisNTopControlRegion          = CreateH1F("hbTagDisNTopControlRegion",          "", 300, -10, 20);
+  hbTagDisNTopTaggedTopControlRegion = CreateH1F("hbTagDisNTopTaggedTopControlRegion", "", 300, -10, 20);
   
 }
-
-    // Data-driven methods: Top                                                                                                                                                      
-    //----------------------------------------------------------------------------                                                                                                   
-    hTopTaggedEvents            = CreateH1F("hTopTaggedEvents",            "", 3, 0, 3);
-    hNTopControlRegion          = CreateH1F("hNTopControlRegion",          "", 3, 0, 3);
-    hNTopTaggedTopControlRegion = CreateH1F("hNTopTaggedTopControlRegion", "", 3, 0, 3);
-
-    hbTagDisTopTaggedEvents            = CreateH1F("hbTagDisTopTaggedEvents",            "", 300, -10, 20);
-    hbTagDisNTopControlRegion          = CreateH1F("hbTagDisNTopControlRegion",          "", 300, -10, 20);
-    hbTagDisNTopTaggedTopControlRegion = CreateH1F("hbTagDisNTopTaggedTopControlRegion", "", 300, -10, 20);
-
-
-  }
 
 
 
 void test::InsideLoop() {
- 
+  
   TString TheSample = GetInputParameters()->TheNamedString("theSample");
-  h_n_PV -> Fill(zveto);
+  
+  // The InsideLoop() function is called for each entry in the tree to be processed  
+  
+  Double_t efficiencyW = effW * triggW;
+  Double_t totalW      = -999;
+  
+  Double_t mybaseW = 1;
+  
+  Float_t nllW = 1;
 
- // The InsideLoop() function is called for each entry in the tree to be processed  
-
-
-
-
-    Double_t efficiencyW = effW * triggW;
-    Double_t totalW      = -999;
-
-    
-    Double_t mybaseW = 1;
-
-    Float_t nllW = 1;
-
-
-    if ( TheSample.Contains("_nnll") ) {
-      if ( TheSample.Contains("_pow_") ) mybaseW = 5984.0/999864; 
-      if ( TheSample.Contains("_mad_") ) mybaseW = 5984.0/1933235;
-      if ( TheSample.Contains("_mcnlo_") ) mybaseW = 5984.0/539594;
+  if ( TheSample.Contains("_nnll") ) {
+    if ( TheSample.Contains("_pow_") ) mybaseW = 5984.0/999864; 
+    if ( TheSample.Contains("_mad_") ) mybaseW = 5984.0/1933235;
+    if ( TheSample.Contains("_mcnlo_") ) mybaseW = 5984.0/539594;
+  }
+  
+  //5812.3/539594; // mcnlo 
+  //5812.3/1933235; // madgraph (1933232)
+  // 5812.3/999864; // powheg (999860)
+  
+    if (TheSample.Contains("Data")){
+      
+      totalW = 1.0;
     }
     
-
-    //5812.3/539594; // mcnlo 
-    //5812.3/1933235; // madgraph (1933232)
-    // 5812.3/999864; // powheg (999860)
-
-    if (TheSample.Contains("Data"))
-      totalW = 1.0;
-
     else if (TheSample.Contains("WJetsFakes")) { 
       totalW = fakeW;
-    
-    
       
       if ( dataset >= 82 && dataset <= 86 ) 
 	totalW  = fakeW * (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * baseW * puW * effW * triggW * Luminosity;
-    
+      
     }
-
-
+    
     else if (TheSample.Contains("_nnll") ) {
       efficiencyW = puW * effW * triggW * nllW;
       totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * mybaseW * efficiencyW * Luminosity;
     } 
-
+    
     else {
       efficiencyW = puW * effW * triggW ;
       totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * baseW * efficiencyW * Luminosity;
     }
-
+    
+    
     //cout <<mybaseW << endl;
-
+    
     //if (TheSample.Contains("DYtautau") && dataset != 86) totalW *= (19.4/12.1);
     
     
     // Help variables
     //--------------------------------------------------------------------------
     //   Int_t dphiv = ((njet <= 1 && dphiveto) || (njet > 1 && dphilljetjet < 165.*TMath::DegToRad()));
-
+    
     Int_t dphiv = (njet <= 1 || (njet > 1 && dphilljetjet < 165.*TMath::DegToRad()));
-
+    
     Float_t metvar = (njet <= 1) ? mpmet : pfmet;
 
     Float_t jetbin = njet;
-
+    
     Float_t dyMVA = ( !sameflav || ( (njet!=0 || dymva1>0.88) && (njet!=1 || dymva1>0.84) && ( njet==0 || njet==1 || (pfmet > 45.0)) ) );
-
-	    
+    
+    
     if (njet == 3) jetbin = 2;  
-
-
+    
+    
     Int_t vbfsel = ((jetpt3 <= 30 || !(jetpt3 > 30 && ((jeteta1-jeteta3 > 0 && jeteta2-jeteta3 < 0) || (jeteta2-jeteta3 > 0 && jeteta1-jeteta3 < 0)))));
 
     
     // The selection begins here
     //--------------------------------------------------------------------------
- 
+    
     if (TheSample != "DY" || mctruth != 2 || (flavorChannel != "EMu" || flavorChannel != "MuE"))
       if (run != 201191)
 	if (trigger == 1)
@@ -304,323 +302,295 @@ void test::InsideLoop() {
 		     )//chooses the right decay channel 
 		  {
 
-     
-    // if (dataset == 86 && (flavorChannel == "MuMu" || flavorChannel == "EE")) continue; 
-    // After talking Andrea's just removing this condition!! 
+		    // if (dataset == 86 && (flavorChannel == "MuMu" || flavorChannel == "EE")) continue; 
+		    // After talking Andrea's just removing this condition!! 
 		    /*
-    if ( (SelectedChannel == -1)                                   || 
-	 (channel == SelectedChannel)                              || 
-	 (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
-	 (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
-	 ) 
+		      if ( (SelectedChannel == -1)                                   || 
+		      (channel == SelectedChannel)                              || 
+		      (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
+		      (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
+		      ) 
 		    */
-      
-      
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      //
-      // Data-driven methods
-      //
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // if (pfmet > 20 && mpmet > 20 && mll > 12 && ptll > 45 && nextra == 0 && (dphiv || !sameflav)) { OLD CUTS
-	
-      // if( pfmet > 20 && mpmet > 20 && mll > 12&& nextra == 0 && (dphiv || !sameflav) && dyMVA && ptll>30 && (!sameflav || ptll>45) ) { 
-
-
-      if( pfmet > 20 && mpmet > 20 && mll > 12 && nextra == 0 && (dphiv || !sameflav)  && ptll>30 && (!sameflav || ptll>45) ) { 
-
-
-
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//
-	// Z+jets
-	//
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	//if (dphiv && jetbin == jetChannel && bveto_mu && (bveto_ip && (nbjettche == 0 || njet > 3))) { OLD CUTS
-
-	if( jetbin == jetChannel && bveto_mu && bveto_ip==1 && nbjettche==0 && ptll > 45) { 
-
-
-	  // Loop over the metvar bins
-	  //--------------------------------------------------------------------
-	  for (size_t mc=0; mc<numberDYMVACuts; mc ++) {
-	    
-	    if ( jetbin == 0 ) { 
-
-	      if ( dymva1 > DYMVACut_0j[mc] && fabs(mll - ZMASS) < 7.5) {
-		hNinLooseZevents[mc]->Fill(1,totalW);
-	      }
-
-	      if (dymva1 > DYMVACut_0j[mc] && dymva1 < DYMVACut_0j[mc+1]) {   
-		if (fabs(mll - ZMASS) < 7.5) {
-		  hNinZevents[mc]   ->Fill(  1, totalW);
-		  hMassInZevents[mc]->Fill(mll, totalW);
-		}
-		else if (fabs(mll - ZMASS) > 15) {  
-		  hNoutZevents[mc]   ->Fill(  1, totalW);
-		  hMassOutZevents[mc]->Fill(mll, totalW);
-		}
-	      }
-	    }
-
-	    if ( jetbin == 1 ) { 
-
-	      if ( dymva1 > DYMVACut_1j[mc] && fabs(mll - ZMASS) < 7.5) {
-		hNinLooseZevents[mc]->Fill(1,totalW);
-	      }
-
-	      if (dymva1 > DYMVACut_1j[mc] && dymva1 < DYMVACut_1j[mc+1]) {   
-		if (fabs(mll - ZMASS) < 7.5) {
-		  hNinZevents[mc]   ->Fill(  1, totalW);
-		  hMassInZevents[mc]->Fill(mll, totalW);
-		}
-		else if (fabs(mll - ZMASS) > 15) {  
-		  hNoutZevents[mc]   ->Fill(  1, totalW);
-		  hMassOutZevents[mc]->Fill(mll, totalW);
-		}
-	      }
-	    }
-
-
-	  }
-	}
-	
-      
-
-
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//
-	// Top
-	//
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	//   if (zveto  && metvar > (20 + 25*sameflav)) { OLD CUTS
-
-	if ( zveto && dyMVA ) {
-
-	  
-	  // btag_eff denominator
-	  if ((jetChannel == 0 && njet == 1 && nbjet == 1) || // jetBProbabilityBJetTags discriminator
-	      (jetChannel == 1 && njet == 2 && jettche2 > 2.1) ||
-	      (jetChannel == 2)) {
-
-	    hNTopControlRegion->Fill(1, totalW);
-	    hbTagDisNTopControlRegion->Fill(jettche2, totalW);
-	    
-	    // btag_eff numerator
-	    if ((jetChannel == 0 && !bveto_nj30) || // bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto for jetPt<30 
-		(jetChannel == 1 && jettche1 > 2.1) ||
-		(jetChannel == 2)) {
-	      
-	      hNTopTaggedTopControlRegion->Fill(1, totalW);
-	      hbTagDisNTopTaggedTopControlRegion->Fill(jettche2, totalW);
-	    }
-	  }
-	  
-	}
-
-	// Top-tagged events for ttbar estimation
-	//----------------------------------------------------------------------
-	if (zveto && dyMVA) {
-
-	  if ((jetChannel == 0 && njet == 0 && !bveto) ||
-	      (jetChannel == 1 && njet == 1 && bveto && jettche1 > 2.1) || // bveto == bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto (no pt requirement)
-	      (jetChannel == 2)) {
-	    
-	    hTopTaggedEvents->Fill(1, totalW);
-	    hbTagDisTopTaggedEvents->Fill(jettche2, totalW);
-	  }
-	}
-      }
-
-     
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      //
-      // Main analisis
-      //
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        
-  
-
-      hWTrigger   ->Fill(1, totalW); 
-      hWeffTrigger->Fill(1, efficiencyW);
-
-
-
-	  hPtLepton1TwoLeptonsLevel      ->Fill(pt1,       totalW);
-	  hPtLepton2TwoLeptonsLevel      ->Fill(pt2,       totalW);
-	  hPtDiLeptonTwoLeptonsLevel     ->Fill(ptll,      totalW);
-	  hMinvTwoLeptonsLevel           ->Fill(mll,       totalW);
-	  hMtTwoLeptonsLevel             ->Fill(mth,       totalW);
-	  hNJets30TwoLeptonsLevel        ->Fill(njet,      totalW);
-	  hpfMetTwoLeptonsLevel          ->Fill(pfmet,     totalW);
-	  hppfMetTwoLeptonsLevel         ->Fill(ppfmet,    totalW);
-	  hchMetTwoLeptonsLevel          ->Fill(chmet,     totalW);
-	  hpchMetTwoLeptonsLevel         ->Fill(pchmet,    totalW);
-	  hpminMetTwoLeptonsLevel        ->Fill(mpmet,     totalW);
-	  hDeltaRLeptonsTwoLeptonsLevel  ->Fill(drll,      totalW);
-	  hDeltaPhiLeptonsTwoLeptonsLevel->Fill(dphill,    totalW);
-	  hDPhiPtllJetTwoLeptonsLevel    ->Fill(dphilljet, totalW);
-
-
-	  
-	  //if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
-	    h_TwoLeptons_TightFailEvents ->Fill(1, totalW); 
-	  
-	  if ( pass2012ICHEP1 && pass2012ICHEP2) 
-	    h_TwoLeptons_TightTightEvents ->Fill(1, totalW); 
-	  
-
-	  if ( pass2012ICHEP1 || pass2012ICHEP2) 
-	    h_TwoLeptons_TightLooseEvents ->Fill(1, totalW); 
-	
-
-
-    if (nextra == 0) {
-			
-	    hWExtraLepton->Fill(1, totalW);
-	    hWeffExtraLepton->Fill(1, efficiencyW);
-      
-	    if (pfmet > 20 ) { // removed for differential xsec
-	   
-	      hWMetCut->Fill(1, totalW);
-	      hWeffMetCut->Fill(1, efficiencyW);
-	
-	      if (mll > 12) {
-	    
-		hWLowMinv->Fill(1, totalW);
-		hWeffLowMinv->Fill(1, efficiencyW);
-
-		if (zveto==1 || !sameflav) {
-		  
-		  hWZVeto->Fill(1, totalW); 
-		  hWeffZVeto->Fill(1, efficiencyW); 
-
-		  if (mpmet > 20  && dyMVA ) { 
-
-		
-		    hWpMetCut->Fill(1, totalW);
-		    hWeffpMetCut->Fill(1, efficiencyW);		  
 		    
-
-		    if (dphiv || !sameflav) {
-
-
-		      hWDeltaPhiJet->Fill(1, totalW);
-		      hWeffDeltaPhiJet->Fill(1, efficiencyW);
-
-
-		      if (bveto_mu) { //--> third soft lepton with pt> 3GeV 
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    //
+		    // Data-driven methods
+		    //
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    // if (pfmet > 20 && mpmet > 20 && mll > 12 && ptll > 45 && nextra == 0 && (dphiv || !sameflav)) { OLD CUTS
+		    
+		    // if( pfmet > 20 && mpmet > 20 && mll > 12&& nextra == 0 && (dphiv || !sameflav) && dyMVA && ptll>30 && (!sameflav || ptll>45) ) { 
+		    
+		    
+		    if( pfmet > 20 && mpmet > 20 && mll > 12 && nextra == 0 && (dphiv || !sameflav)  && ptll>30 && (!sameflav || ptll>45) ) { 
 		      
-			hWSoftMuVeto->Fill(1, totalW); 
-			hWeffSoftMuVeto->Fill(1, efficiencyW);
-		     
-
-			 
-			if ( ptll>30 && (!sameflav || ptll>45) ) {
+		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		      //
+		      // Z+jets
+		      //
+		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		      
+		      //if (dphiv && jetbin == jetChannel && bveto_mu && (bveto_ip && (nbjettche == 0 || njet > 3))) { OLD CUTS
+		      
+		      if( jetbin == jetChannel && bveto_mu && bveto_ip==1 && nbjettche==0 && ptll > 45) { 
+	  
+			// Loop over the metvar bins -------------> why only jetbin == 0 and jetbin == 1 ?? ////Z+jets doesn't have more than 1 jet??/////
+			//--------------------------------------------------------------------
+			for (size_t mc=0; mc<numberDYMVACuts; mc ++) {
+			  
+			  if ( jetbin == 0 ) { 
+	      
+			    if ( dymva1 > DYMVACut_0j[mc] && fabs(mll - ZMASS) < 7.5) {
+			      hNinLooseZevents[mc]->Fill(1,totalW);
+			    }
 			    
-			  hWPtll->Fill(1, totalW);
-			  hWeffPtll->Fill(1, efficiencyW);
-			  
-
-			  if (jetbin == jetChannel) {
-			    
-			    hWJetVeto->Fill(1, totalW);
-			    hWeffJetVeto->Fill(1, efficiencyW);
-			    
-
-			    if (bveto_ip==1 &&  nbjettche==0) {
-			      
-			      hWTopTagging->Fill(1, totalW);
-			      hWeffTopTagging->Fill(1, efficiencyW);
-
-		       
-			
-			  
-			  hPtLepton1WWLevel      ->Fill(pt1,       totalW);
-			  hPtLepton2WWLevel      ->Fill(pt2,       totalW);
-			  hPtDiLeptonWWLevel     ->Fill(ptll,      totalW);
-			  hMinvWWLevel           ->Fill(mll,       totalW);
-			  hMtWWLevel             ->Fill(mth,       totalW);
-			  hNJets30WWLevel        ->Fill(njet,      totalW);
-			  hpfMetWWLevel          ->Fill(pfmet,     totalW);
-			  hppfMetWWLevel         ->Fill(ppfmet,    totalW);
-			  hchMetWWLevel          ->Fill(chmet,     totalW);
-			  hpchMetWWLevel         ->Fill(pchmet,    totalW);
-			  hpminMetWWLevel        ->Fill(mpmet,     totalW);
-			  hDeltaRLeptonsWWLevel  ->Fill(drll,      totalW);
-			  hDeltaPhiLeptonsWWLevel->Fill(dphill,    totalW);
-			  hDPhiPtllJetWWLevel    ->Fill(dphilljet, totalW);
-
-			  hPtLepton1WWLevel_Diff  ->Fill(pt1,       totalW);
-			  hEtaLepton1WWLevel_Diff ->Fill(eta1,      totalW);
-			  hDileptonWWLevel_Diff   ->Fill(ptll,      totalW);
-			  hMinvWWLevel_Diff       ->Fill(mll,       totalW);
-			  hDeltaPhiWWLevel_Diff   ->Fill(dphill,    totalW);
-
-
-			  //if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
-			    h_WWLevel_TightFailEvents ->Fill(1, totalW); 
-			  
-			   if ( (pass2012ICHEP1 && pass2012ICHEP2)) 
-			     h_WWLevel_TightTightEvents ->Fill(1, totalW); 
-			  
-			    if ( pass2012ICHEP1 || pass2012ICHEP2) 
-			      h_WWLevel_TightLooseEvents ->Fill(1, totalW); 
-	
-
-
-			}
+			    if (dymva1 > DYMVACut_0j[mc] && dymva1 < DYMVACut_0j[mc+1]) {   
+			      if (fabs(mll - ZMASS) < 7.5) {
+				hNinZevents[mc]   ->Fill(  1, totalW);
+				hMassInZevents[mc]->Fill(mll, totalW);
+			      }
+			      else if (fabs(mll - ZMASS) > 15) {  
+				hNoutZevents[mc]   ->Fill(  1, totalW);
+				hMassOutZevents[mc]->Fill(mll, totalW);
+			      }
+			    }
 			  }
-		      }		      
+			  
+			  if ( jetbin == 1 ) { 
+			    
+			    if ( dymva1 > DYMVACut_1j[mc] && fabs(mll - ZMASS) < 7.5) {
+			      hNinLooseZevents[mc]->Fill(1,totalW);
+			    }
+			    
+			    if (dymva1 > DYMVACut_1j[mc] && dymva1 < DYMVACut_1j[mc+1]) {   
+			      if (fabs(mll - ZMASS) < 7.5) {
+				hNinZevents[mc]   ->Fill(  1, totalW);
+				hMassInZevents[mc]->Fill(mll, totalW);
+			      }
+			      else if (fabs(mll - ZMASS) > 15) {  
+				hNoutZevents[mc]   ->Fill(  1, totalW);
+				hMassOutZevents[mc]->Fill(mll, totalW);
+			      }
+			    }
+			  }
+			  
+			  
+			}
+		      }
+		      
+		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		      //
+		      // Top
+		      //
+		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		      
+		      //   if (zveto  && metvar > (20 + 25*sameflav)) { OLD CUTS
+
+		      if ( zveto && dyMVA ) {
+			
+			// btag_eff denominator
+			if ((jetChannel == 0 && njet == 1 && nbjet == 1) || // jetBProbabilityBJetTags discriminator
+			    (jetChannel == 1 && njet == 2 && jettche2 > 2.1) ||
+			    (jetChannel == 2)) {
+			  
+			  hNTopControlRegion->Fill(1, totalW);
+			  hbTagDisNTopControlRegion->Fill(jettche2, totalW);
+			  
+			  // btag_eff numerator
+			  if ((jetChannel == 0 && !bveto_nj30) || // bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto for jetPt<30 
+			      (jetChannel == 1 && jettche1 > 2.1) ||
+			      (jetChannel == 2)) {
+			    
+			    hNTopTaggedTopControlRegion->Fill(1, totalW);
+			    hbTagDisNTopTaggedTopControlRegion->Fill(jettche2, totalW);
+			  }
+			}
+		      }
+
+		      // Top-tagged events for ttbar estimation
+		      //----------------------------------------------------------------------
+		      if (zveto && dyMVA) {
+			
+			if ((jetChannel == 0 && njet == 0 && !bveto) ||
+			    (jetChannel == 1 && njet == 1 && bveto && jettche1 > 2.1) || // bveto == bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto (no pt requirement)
+			    (jetChannel == 2)) {
+			  
+			  hTopTaggedEvents->Fill(1, totalW);
+			  hbTagDisTopTaggedEvents->Fill(jettche2, totalW);
+			}
+		      }
 		    }
+		    
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    //
+		    // Main analisis
+		    //
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    
+		    hWTrigger   ->Fill(1, totalW); 
+		    hWeffTrigger->Fill(1, efficiencyW);
+		    
+		    hPtLepton1TwoLeptonsLevel      ->Fill(pt1,       totalW);
+		    hPtLepton2TwoLeptonsLevel      ->Fill(pt2,       totalW);
+		    hPtDiLeptonTwoLeptonsLevel     ->Fill(ptll,      totalW);
+		    hMinvTwoLeptonsLevel           ->Fill(mll,       totalW);
+		    hMtTwoLeptonsLevel             ->Fill(mth,       totalW);
+		    hNJets30TwoLeptonsLevel        ->Fill(njet,      totalW);
+		    hpfMetTwoLeptonsLevel          ->Fill(pfmet,     totalW);
+		    hppfMetTwoLeptonsLevel         ->Fill(ppfmet,    totalW);
+		    hchMetTwoLeptonsLevel          ->Fill(chmet,     totalW);
+		    hpchMetTwoLeptonsLevel         ->Fill(pchmet,    totalW);
+		    hpminMetTwoLeptonsLevel        ->Fill(mpmet,     totalW);
+		    hDeltaRLeptonsTwoLeptonsLevel  ->Fill(drll,      totalW);
+		    hDeltaPhiLeptonsTwoLeptonsLevel->Fill(dphill,    totalW);
+		    hDPhiPtllJetTwoLeptonsLevel    ->Fill(dphilljet, totalW);
+		    
+		    //if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
+		    h_TwoLeptons_TightFailEvents ->Fill(1, totalW); 
+		    
+		    if ( pass2012ICHEP1 && pass2012ICHEP2) 
+		      h_TwoLeptons_TightTightEvents ->Fill(1, totalW); 
+		    
+		    if ( pass2012ICHEP1 || pass2012ICHEP2) 
+		      h_TwoLeptons_TightLooseEvents ->Fill(1, totalW); 
+		    
+		    if (nextra == 0) {
+		      
+		      hWExtraLepton->Fill(1, totalW);
+		      hWeffExtraLepton->Fill(1, efficiencyW);
+		      
+		      if (pfmet > 20 ) { // removed for differential xsec
+			
+			hWMetCut->Fill(1, totalW);
+			hWeffMetCut->Fill(1, efficiencyW);
+			
+			if (mll > 12) {
+			  
+			  hWLowMinv->Fill(1, totalW);
+			  hWeffLowMinv->Fill(1, efficiencyW);
+			  
+			  if (zveto==1 || !sameflav) {
+			    
+			    hWZVeto->Fill(1, totalW); 
+			    hWeffZVeto->Fill(1, efficiencyW); 
+			    
+			    if (mpmet > 20  && dyMVA ) { 
+			      
+			      hWpMetCut->Fill(1, totalW);
+			      hWeffpMetCut->Fill(1, efficiencyW);		  
+			      
+			      if (dphiv || !sameflav) {
+				
+				hWDeltaPhiJet->Fill(1, totalW);
+				hWeffDeltaPhiJet->Fill(1, efficiencyW);
+				
+				if ( ptll>30 && (!sameflav || ptll>45) ) {
+				  
+				  hWPtll->Fill(1, totalW);
+				  hWeffPtll->Fill(1, efficiencyW);
+				  
+				  /*if (jetbin == jetChannel)*/ {
+				    
+				    hWJetVeto->Fill(1, totalW);
+				    hWeffJetVeto->Fill(1, efficiencyW);
+				    
+				    hWnJetsBeforeBtag->Fill(njet, totalW);
+				    hWeffnJetsBeforeBtag->Fill(njet, efficiencyW);
+				    
+				    //b-tagging
+				    if (bveto_ip==1 &&  nbjettche==0) {
+				      
+				      hWTopTagging->Fill(1, totalW);
+				      hWeffTopTagging->Fill(1, efficiencyW);
+				      
+				      //b-tagging
+				      if (bveto_mu) { //--> third soft lepton with pt> 3GeV 
+					
+					hWSoftMuVeto->Fill(1, totalW); 
+					hWeffSoftMuVeto->Fill(1, efficiencyW);
+					
+					hWnJetsAfterBtag->Fill(njet, totalW);
+					hWeffnJetsAfterBtag->Fill(njet, efficiencyW);
+					
+					for (Int_t jetNumber = 0; jetNumber < 3 ; ++jetNumber)
+					  if(jetNumber == jetbin){
+					    hPtLepton1WWLevel[jetNumber]      ->Fill(pt1,       totalW);
+					    hPtLepton2WWLevel[jetNumber]      ->Fill(pt2,       totalW);
+					    hPtDiLeptonWWLevel[jetNumber]     ->Fill(ptll,      totalW);
+					    hMinvWWLevel[jetNumber]           ->Fill(mll,       totalW);
+					    hMtWWLevel[jetNumber]             ->Fill(mth,       totalW);
+					    hNJets30WWLevel[jetNumber]        ->Fill(jetNumber, totalW);
+					    hpfMetWWLevel[jetNumber]          ->Fill(pfmet,     totalW);
+					    hppfMetWWLevel[jetNumber]         ->Fill(ppfmet,    totalW);
+					    hchMetWWLevel[jetNumber]          ->Fill(chmet,     totalW);
+					    hpchMetWWLevel[jetNumber]         ->Fill(pchmet,    totalW);
+					    hpminMetWWLevel[jetNumber]        ->Fill(mpmet,     totalW);
+					    hDeltaRLeptonsWWLevel[jetNumber]  ->Fill(drll,      totalW);
+					    hDeltaPhiLeptonsWWLevel[jetNumber]->Fill(dphill,    totalW);
+					    hDPhiPtllJetWWLevel[jetNumber]    ->Fill(dphilljet, totalW);
+					    /*			    
+								    if (TheSample.Contains("Data")){
+								    hDataEvents[jetNumber]          ->Fill(1);
+								    }
+								    else{
+								    hBackgroundEvents[jetNumber]    ->Fill(1,totalW);
+								    }*/
+					  }  
+					
+					hPtLepton1WWLevel_Diff  ->Fill(pt1,       totalW);
+					hEtaLepton1WWLevel_Diff ->Fill(eta1,      totalW);
+					hDileptonWWLevel_Diff   ->Fill(ptll,      totalW);
+					hMinvWWLevel_Diff       ->Fill(mll,       totalW);
+					hDeltaPhiWWLevel_Diff   ->Fill(dphill,    totalW);
+					
+					//if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
+					h_WWLevel_TightFailEvents ->Fill(1, totalW); 
+					
+					if ( (pass2012ICHEP1 && pass2012ICHEP2)) 
+					  h_WWLevel_TightTightEvents ->Fill(1, totalW); 
+					
+					if ( pass2012ICHEP1 || pass2012ICHEP2) 
+					  h_WWLevel_TightLooseEvents ->Fill(1, totalW); 
+					
+				      }
+				    }
+				  }		      
+				}
+			      }
+			    }
+			  }
+			}
+		      }
+		    }
+		    
+		    // Define Normalization Factor for MC samples 
+		    
+		    //------------------------------------------------------------------------------
+		    // Define weights
+		    //------------------------------------------------------------------------------
+		    
+		    float pileupweight = 1;
+		    
+		    //  if (!IsDATA)
+		    // pileupweight = fPUWeight->GetWeight(T_Event_nPU);
+		    
+		    
+		    
+		    
+		    double factN = 1;
+		    
+		    if (XSection > 0) factN = XSection * Luminosity / NEvents;
+		    
+		    
+		    //factN = factN*pileupweight;
+		    
+		    
+		    //------------------------------------------------------------------------------
+		    // Init variables
+		    //------------------------------------------------------------------------------
+		    
+		    
 		  }
-		}
-	      }
-	    }
-	  }
-	}
-       
-
-
-   
-
-
-
-
-
-
-  // Define Normalization Factor for MC samples 
-
-
-
-//------------------------------------------------------------------------------
-// Define weights
-//------------------------------------------------------------------------------
- 
-  float pileupweight = 1;
-
-  //  if (!IsDATA)
-    // pileupweight = fPUWeight->GetWeight(T_Event_nPU);
-
-
-
-
-  double factN = 1;
-  
-  if (XSection > 0) factN = XSection * Luminosity / NEvents;
-
-
-  //factN = factN*pileupweight;
-
-
-  //------------------------------------------------------------------------------
-  // Init variables
-  //------------------------------------------------------------------------------
-  
-    
-    }
 }// end inside Loop
 
 
@@ -631,15 +601,21 @@ void test::InsideLoop() {
 void test::SetDataMembersAtTermination() {
 
   h_n_PV = ((TH1F*) FindOutput("h_n_PV")); 
-
-   // Counting histograms                                                                  //----------------------------------------------------------------------------       
-
+  
+  // Counting histograms                             
+  //----------------------------------------------------------------------------       
+  
   hWTrigger     = ((TH1F*) FindOutput("hWTrigger"));
   hWMetCut      = ((TH1F*) FindOutput("hWMetCut"));
   hWLowMinv     = ((TH1F*) FindOutput("hWLowMinv"));
   hWZVeto       = ((TH1F*) FindOutput("hWZVeto"));
   hWpMetCut     = ((TH1F*) FindOutput("hWpMetCut"));
   hWJetVeto     = ((TH1F*) FindOutput("hWJetVeto"));
+  hWnJetsBeforeBtag = ((TH1F*) FindOutput("hWnJetsBeforeBtag"));
+  hWeffnJetsBeforeBtag = ((TH1F*) FindOutput("hWeffnJetsBeforeBtag"));
+  hWnJetsAfterBtag = ((TH1F*) FindOutput("hWnJetsAfterBtag"));
+  hWeffnJetsAfterBtag = ((TH1F*) FindOutput("hWeffnJetsAfterBtag"));
+    
   hWDeltaPhiJet = ((TH1F*) FindOutput("hWDeltaPhiJet"));
   hWSoftMuVeto  = ((TH1F*) FindOutput("hWSoftMuVeto"));
   hWExtraLepton = ((TH1F*) FindOutput("hWExtraLepton"));
@@ -657,24 +633,28 @@ void test::SetDataMembersAtTermination() {
   hWeffExtraLepton = ((TH1F*) FindOutput("hWeffExtraLepton"));
   hWeffPtll        = ((TH1F*) FindOutput("hWeffPtll"));
   hWeffTopTagging  = ((TH1F*) FindOutput("hWeffTopTagging"));
-
+  
 
   // WW level histograms                                                                                                                                                           
   //----------------------------------------------------------------------------                                                                                                   
-  hPtLepton1WWLevel       = ((TH1F*) FindOutput("hPtLepton1WWLevel"));
-  hPtLepton2WWLevel       = ((TH1F*) FindOutput("hPtLepton2WWLevel"));
-  hPtDiLeptonWWLevel      = ((TH1F*) FindOutput("hPtDiLeptonWWLevel"));
-  hMinvWWLevel            = ((TH1F*) FindOutput("hMinvWWLevel"));
-  hMtWWLevel              = ((TH1F*) FindOutput("hMtWWLevel"));
-  hNJets30WWLevel         = ((TH1F*) FindOutput("hNJetsPF30WWLevel"));
-  hpfMetWWLevel           = ((TH1F*) FindOutput("hpfMetWWLevel"));
-  hppfMetWWLevel          = ((TH1F*) FindOutput("hppfMetWWLevel"));
-  hchMetWWLevel           = ((TH1F*) FindOutput("hchMetWWLevel"));
-  hpchMetWWLevel          = ((TH1F*) FindOutput("hpchMetWWLevel"));
-  hpminMetWWLevel         = ((TH1F*) FindOutput("hpminMetWWLevel"));
-  hDeltaRLeptonsWWLevel   = ((TH1F*) FindOutput("hDeltaRLeptonsWWLevel"));
-  hDeltaPhiLeptonsWWLevel = ((TH1F*) FindOutput("hDeltaPhiLeptonsWWLevel"));
-  hDPhiPtllJetWWLevel     = ((TH1F*) FindOutput("hDPhiPtllJetWWLevel"));
+  for (Int_t qq = 0; qq < 3; ++qq){
+  hPtLepton1WWLevel[qq]       = ((TH1F*) FindOutput("hPtLepton1WWLevel%.1i",qq));
+  hPtLepton2WWLevel[qq]       = ((TH1F*) FindOutput("hPtLepton2WWLevel%.1i",qq));
+  hPtDiLeptonWWLevel[qq]      = ((TH1F*) FindOutput("hPtDiLeptonWWLevel%.1i",qq));
+  hMinvWWLevel[qq]            = ((TH1F*) FindOutput("hMinvWWLevel%.1i",qq));     // %.1i",qq 
+  hMtWWLevel[qq]              = ((TH1F*) FindOutput("hMtWWLevel%.1i",qq));
+  hNJets30WWLevel[qq]         = ((TH1F*) FindOutput("hNJetsPF30WWLevel%.1i",qq));
+  hpfMetWWLevel[qq]           = ((TH1F*) FindOutput("hpfMetWWLevel%.1i",qq));
+  hppfMetWWLevel[qq]          = ((TH1F*) FindOutput("hppfMetWWLevel%.1i",qq));
+  hchMetWWLevel[qq]           = ((TH1F*) FindOutput("hchMetWWLevel%.1i",qq));
+  hpchMetWWLevel[qq]          = ((TH1F*) FindOutput("hpchMetWWLevel%.1i",qq));
+  hpminMetWWLevel[qq]         = ((TH1F*) FindOutput("hpminMetWWLevel%.1i",qq));
+  hDeltaRLeptonsWWLevel[qq]   = ((TH1F*) FindOutput("hDeltaRLeptonsWWLevel%.1i",qq));
+  hDeltaPhiLeptonsWWLevel[qq] = ((TH1F*) FindOutput("hDeltaPhiLeptonsWWLevel%.1i",qq));
+  hDPhiPtllJetWWLevel[qq]     = ((TH1F*) FindOutput("hDPhiPtllJetWWLevel%.1i",qq));
+  hDataEvents[qq]             = ((TH1F*) FindOutput("hDataEvents%.1i",qq));
+  hBackgroundEvents[qq]       = ((TH1F*) FindOutput("hBackgroundEvents%.1i",qq));
+ }
 
   h_WWLevel_TightFailEvents = ((TH1F*) FindOutput("h_WWLevel_TightFailEvents"));
   h_WWLevel_TightTightEvents = ((TH1F*) FindOutput("h_WWLevel_TightTightEvents"));
@@ -778,8 +758,7 @@ void test::Summary() {
 
   double factN = 1.; 
   if (XSection > 0) factN = XSection * Luminosity / NEvents; //fractionoftotalevents;
-
-
+  
   cout << " Normalization factor: " << factN << endl;
   cout << endl;
   cout << " ---------------------------------------------------" << endl;

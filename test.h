@@ -62,6 +62,13 @@ class test: public PAFAnalysis{
    TH1F* hWZVeto;
    TH1F* hWpMetCut;
    TH1F* hWJetVeto;
+   TH1F* hWnJetsBeforeBtag;
+   TH1F* hWeffnJetsBeforeBtag;
+   TH1F* hWnJetsAfterBtag;
+   TH1F* hWeffnJetsAfterBtag;
+
+
+
    TH1F* hWDeltaPhiJet;
    TH1F* hWSoftMuVeto;
    TH1F* hWExtraLepton;
@@ -83,20 +90,22 @@ class test: public PAFAnalysis{
    // WW level histograms                                                         
    //---------------------------------------------------------------------------- 
    
-   TH1F* hPtLepton1WWLevel;
-   TH1F* hPtLepton2WWLevel;
-   TH1F* hPtDiLeptonWWLevel;
-   TH1F* hMinvWWLevel;
-   TH1F* hMtWWLevel;
-   TH1F* hNJets30WWLevel;
-   TH1F* hpfMetWWLevel;
-   TH1F* hppfMetWWLevel;
-   TH1F* hchMetWWLevel;
-   TH1F* hpchMetWWLevel;
-   TH1F* hpminMetWWLevel;
-   TH1F* hDeltaRLeptonsWWLevel;
-   TH1F* hDeltaPhiLeptonsWWLevel;
-   TH1F* hDPhiPtllJetWWLevel;
+   TH1F* hPtLepton1WWLevel[3];
+   TH1F* hPtLepton2WWLevel[3];
+   TH1F* hPtDiLeptonWWLevel[3];
+   TH1F* hMinvWWLevel[3];
+   TH1F* hMtWWLevel[3];
+   TH1F* hNJets30WWLevel[3];
+   TH1F* hpfMetWWLevel[3];
+   TH1F* hppfMetWWLevel[3];
+   TH1F* hchMetWWLevel[3];
+   TH1F* hpchMetWWLevel[3];
+   TH1F* hpminMetWWLevel[3];
+   TH1F* hDeltaRLeptonsWWLevel[3];
+   TH1F* hDeltaPhiLeptonsWWLevel[3];
+   TH1F* hDPhiPtllJetWWLevel[3];
+   TH1F* hDataEvents[3];
+   TH1F* hBackgroundEvents[3];
 
    TH1F* h_WWLevel_TightFailEvents;
    TH1F* h_WWLevel_TightTightEvents;
