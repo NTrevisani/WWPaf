@@ -242,7 +242,8 @@ void RunPROOF_test(double luminosity,
 
   else if (theSample == "DYtautau") { // Only for OF channels!!! 
 
-    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V08_S2_V09_S3_V13/MoriondeffW/TauTau/latino_DYtt_19.5fb.root");
+    gPAFOptions->dataFiles.push_back(" /gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V08_S2_V09_S3_V13/MoriondeffW/TauTau/latino_DYtt_19.5fb.root");
+    //    gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V08_S2_V09_S3_V13/MoriondeffW/TauTau/latino_DYtt_19.5fb.root");
     
   }
 
