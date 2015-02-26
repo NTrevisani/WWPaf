@@ -1,7 +1,4 @@
 # WWPaf
-
-WARNING: VERY EARLY VERSION!!
-
 To get the code type:
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
