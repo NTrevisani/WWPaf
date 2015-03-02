@@ -52,5 +52,5 @@ RunPROOF_test.C
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mkdir rootFiles/AllJet/EMu
 
-root -l -b -q 'RunPROOF_test.C(19.468,"test","DataRun2012_Total",0,"EMu")'
+root -l -b -q 'RunPROOF_test.C(19.365,"test","DataRun2012_Total",0,"EMu")'
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
