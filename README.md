@@ -1,7 +1,4 @@
 # WWPaf
-
-WARNING: VERY EARLY VERSION!!
-
 To get the code type:
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,10 +23,11 @@ export PATH=$PAFPATH/bin:$PATH
  To run type: 
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./run.sh "njets"
+./runAllJets.sh "njets"
 
 where "njets" = 0,1,2
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ok, it's a nonsense, but we've not completely moved to the "all jets" analysis up to now
 
  root files are stored in rootFiles/"njets"jets/"channel"
 
@@ -52,7 +50,7 @@ RunPROOF_test.C
  For a test-run type:
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-mkdir rootFiles/0jets/EE
+mkdir rootFiles/AllJet/EMu
 
-root -l -b -q 'RunPROOF_test.C(19.468,"test","DataRun2012_Total",0,"EE")'
+root -l -b -q 'RunPROOF_test.C(19.365,"test","DataRun2012_Total",0,"EMu")'
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
