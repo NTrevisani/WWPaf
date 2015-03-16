@@ -13,7 +13,7 @@ TEST="test"
 
 NJETS=$1
 
-CHANNELS="EMu"
+CHANNELS="OF"
 #"All SF OF EE MuE EMu MuMu "
 
 
@@ -32,6 +32,7 @@ DY                 \
 WgammaStar         \
 WgammaNoStar       \
 DYtautau           \
+VBF                \
 Zgamma             \
 HWW125             \
 VVV                \
@@ -43,7 +44,6 @@ WWTo2L2Nu_nonSkim_pow \
 WWTo2L2Nu_mcnlo_nnll  \
 WWTo2L2Nu_mad_nnll \
 Top                \
-
 "
 
 #rm -rf rootfiles/${NJETS}jet
