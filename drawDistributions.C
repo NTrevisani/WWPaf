@@ -6,10 +6,10 @@
 #include "TSystem.h"
 #include "TTree.h"
 
-const UInt_t nProcesses = 15;
+const UInt_t nProcesses = 16 ;
 
 //enum {iData, iWW, iWZ, iZZ, iWg, itt, itW, iWj, iDY, iDYtau, iH125};
-enum {iData, iWW, iqqWW, itt, itW, iWZ, iZZ, iWg, iWgS, iWj, iDY, iDYtau,  iZg, iVVV, iH125, iVBF};
+enum {iData, iWW, iqqWW, itt, itW, iWZ, iZZ, iWg, iWgS, iWj, iDY, iDYtau, iVBF,  iZg, iVVV, iH125};
 
 TFile* input[nProcesses];
 
@@ -31,7 +31,7 @@ process[iDYtau] = "DYtautau";
 process[iZg]    = "Zgamma";
 process[iVVV]   = "VVV";
 process[iH125]  = "HWW125";
-//process[iVBF]   = "VBF";
+process[iVBF]   = "VBF";
 
 
 
@@ -52,7 +52,7 @@ color[iDYtau] = kGreen+2;
 color[iZg]    = kAzure-2;
 color[iVVV]   = kAzure-2;
 color[iH125]  = kRed;
-//color[iVBF]   = kRed+1;
+color[iVBF]   = kBlack;
 
 
 
@@ -68,8 +68,7 @@ enum backgrounds {
    DYtt,
    VV,
    ggH,
-   VgS//,
-   //   VBF
+   VgS
 };
  
 
@@ -126,7 +125,7 @@ Double_t ZjScale[] = {1.00, 1.00, 1.00, 1.00};//{1.00, 4.20, 1.80, 4.00};
 void drawDistributions(Int_t    njet       = 0,
 		       TString  channel    = "OF",
 		       Double_t luminosity = 19365,
-		       TString  format     = "png",
+		       TString  format     = "pdf",
 		       Bool_t   drawRatio  = true,
 		       Bool_t   dataDriven = false,
 		       Bool_t   savePlots  = true,
@@ -170,10 +169,11 @@ void drawDistributions(Int_t    njet       = 0,
   //----------------------------------------------------------------------------
   if (1) {
 
-    DrawHistogram("hPtLepton1WWLevel_Diff",  "p_{T}^{max}",           1, 0, "GeV","");
-    DrawHistogram("hDileptonWWLevel_Diff",  "p_{T} (ll) ",           1, 0, "GeV","");
-    DrawHistogram("hDeltaPhiWWLevel_Diff",  "#Delta#phi_{ll}", 1, 0, "rad","");
-    DrawHistogram("hMinvWWLevel_Diff",  "m_{#font[12]{ll}}",           1, 0, "GeV","");
+    DrawHistogram("hPtLepton1WWLevel_Diff",  "p_{T}^{max}"   ,  1, 0, "GeV","");
+    DrawHistogram("hDileptonWWLevel_Diff",  "p_{T} (ll) "    ,  1, 0, "GeV","");
+    DrawHistogram("hDeltaPhiWWLevel_Diff",  "#Delta#phi_{ll}",  1, 0, "rad","");
+    DrawHistogram("hMinvWWLevel_Diff",  "m_{#font[12]{ll}}"  ,  1, 0, "GeV","");
+
   }
 
   // DY distributions
@@ -199,25 +199,56 @@ void drawDistributions(Int_t    njet       = 0,
   // PAS distributions
   //----------------------------------------------------------------------------
   if (1) {
-    for(Int_t _nje = 0; _nje < 3; ++_nje){
-      char name[80];
-      sprintf(name,"hPtLepton1WWLevel%d",_nje);
+    for(Int_t _nje = 0; _nje < 4; ++_nje){
+
       TString nj;
-      nj.Form("%d-Jet",_nje);
+      nj.Form("%d Jet",_nje);
+      if (_nje == 2) nj.Form("%d+ Jet",_nje);
+      if (_nje == 3) nj = "Inclusive";
+
+      char name[80];
+
+      sprintf(name,"hPtLepton1WWLevel%d",_nje);
       DrawHistogram(name,  "p_{T}^{max}",           10, 0, "GeV",nj.Data(), 20, 200);
-      //DrawHistogram("hPtLepton2WWLevel",  "p_{T}^{min}",           5, 0, "GeV", 20, 100);
+
+      sprintf(name,"hpfMetWWLevel%d",_nje);
+      DrawHistogram(name, "pfMET", 5, 0, "GeV",nj.Data());
+
       sprintf(name,"hPtDiLeptonWWLevel%d",_nje);
       DrawHistogram(name, "p_{T}^{#font[12]{ll}}", 5, 0, "GeV",nj.Data());
+
       sprintf(name,"hMinvWWLevel%d",_nje);
       DrawHistogram(name,       "m_{#font[12]{ll}}",     5, 0, "GeV",nj.Data());
-      //DrawHistogram("hNJetsPF30WWLevel",  "nJets",                 1, 0, "");
-      //DrawHistogram("hDeltaRLeptonsWWLevel",   "#DeltaR_{ll}",     5, 0, "rad");
+
       sprintf(name,"hDeltaPhiLeptonsWWLevel%d",_nje);
       DrawHistogram(name, "#Delta#phi_{ll}",  1, 0, "rad",nj.Data());
-      //DrawHistogram("hpminMetWWLevel",         "min.proj.E_{T}",   6, 0, "GeV", 20, 200);
+
+      
+      sprintf(name,"hPtLepton1WWLevelNoHt%d",_nje);
+      DrawHistogram(name,  "p_{T}^{max}",           10, 0, "GeV",nj.Data(), 20, 200);
+      
+      sprintf(name,"hpfMetWWLevelNoHt%d",_nje);
+      DrawHistogram(name, "pfMET", 5, 0, "GeV",nj.Data());
+
+      sprintf(name,"hPtDiLeptonWWLevelNoHt%d",_nje);
+      DrawHistogram(name, "p_{T}^{#font[12]{ll}}", 5, 0, "GeV",nj.Data());
+
+      sprintf(name,"hMinvWWLevelNoHt%d",_nje);
+      DrawHistogram(name,       "m_{#font[12]{ll}}",     5, 0, "GeV",nj.Data());
+
+      sprintf(name,"hDeltaPhiLeptonsWWLevelNoHt%d",_nje);
+      DrawHistogram(name, "#Delta#phi_{ll}",  1, 0, "rad",nj.Data());
+
+      sprintf(name,"hHt%d",_nje);
+      DrawHistogram(name, "Ht"             , 10, 1, "GeV",nj.Data(),0.,500.);
+
+      sprintf(name,"hHtAfter%d",_nje);
+      DrawHistogram(name, "Ht"             , 10, 1, "GeV",nj.Data(),0.,500.);
     }
     DrawHistogram("hWnJets", "number of jets",  1, 1,"","",0.,8.);
     DrawHistogram("hWnBtaggedJets", "number of jets",  1, 1,"","",0.,8.);
+
+
   }
 
   if(0){
@@ -232,7 +263,7 @@ void drawDistributions(Int_t    njet       = 0,
     systError[iDY]    = 0.; // 37%
     systError[iDYtau] = 0.; // ?
     systError[iH125]  = 0.; // 7.4%
-    //    systError[iVBF]   = 0.; // ?
+    systError[iVBF]   = 0.; // ?
 
     _setLogy = false;
 
@@ -363,7 +394,7 @@ void DrawHistogram(TString  hname,
   systError[iZg]     = Systematics [Vg+defineChannel] / 1e2;
   systError[iVVV]    = Systematics [VVV+defineChannel]/ 1e2;
   systError[iH125]   = Systematics [ggH+defineChannel]/ 1e2;
-  //  systError[iVBF]    = Systematics [VBF+defineChannel]/ 1e2;
+  systError[iVBF]    = Systematics [ggH+defineChannel]/ 1e2;
 
 
   // All MC
@@ -428,6 +459,27 @@ void DrawHistogram(TString  hname,
   yaxis->SetTitle(Form(ytitle.Data(), hist[iData]->GetBinWidth(0)));
   yaxis->SetTitleOffset(1.6);
 
+  xaxis->SetLabelFont  (    42);
+  xaxis->SetLabelOffset( 0.025);
+  xaxis->SetLabelSize  (   0.04);
+  xaxis->SetNdivisions (   505);
+  //xaxis->SetTitle      (xtitle);
+  xaxis->SetTitleFont  (    42);
+  xaxis->SetTitleOffset(  1.35);
+  xaxis->SetTitleSize  (  0.045);
+  
+  yaxis->CenterTitle   (      );
+  yaxis->SetLabelFont  (    42);
+  yaxis->SetLabelOffset(  0.02);
+  yaxis->SetLabelSize  (   0.04);
+  yaxis->SetNdivisions (   505);
+  //yaxis->SetTitle      (ytitle);
+  yaxis->SetTitleFont  (    42);
+  yaxis->SetTitleOffset(  1.80);
+  yaxis->SetTitleSize  (  0.045);
+
+
+
   if (!units.Contains("NULL")) {
     
     xaxis->SetTitle(Form("%s [%s]", xaxis->GetTitle(), units.Data()));
@@ -438,9 +490,10 @@ void DrawHistogram(TString  hname,
   // Draw
   //----------------------------------------------------------------------------
   xaxis->SetRangeUser(xmin, xmax);
-  yaxis->SetRangeUser(0., hist[iData]->GetMaximum()*1.2);
+  yaxis->SetRangeUser(0., 6.);//hist[iData]->GetBinContent(hist[iData]->GetMaximumBin()));
 
   hist[iData]->Draw("ep");
+
   hstack     ->Draw("hist,same");
   allmc      ->Draw("e2,same");
   hist[iData]->Draw("ep,same");
@@ -479,7 +532,7 @@ void DrawHistogram(TString  hname,
   DrawLegend(  x0, 0.74 + 1.*(yoffset+0.001), hist[iWj],   " W+jets",  "f",  0.035, 0.2, yoffset);
   DrawLegend(  x0, 0.74,                      hist[itt],   " top",     "f",  0.035, 0.2, yoffset);
   DrawLegend(  x0, 0.74 - 1.*(yoffset+0.001), allmc,       allmcTitle, "f",  0.035, 0.2, yoffset);
-  //  DrawLegend(0.23, 0.74 - 2.*(yoffset+0.001), hist[iVBF], " VBF",      "f",  0.035, 0.2, yoffset);  
+  DrawLegend(0.23, 0.74 - 2.*(yoffset+0.001), hist[iVBF], " VBF",      "f",  0.035, 0.2, yoffset);  
 
   // Additional titles
   //----------------------------------------------------------------------------
