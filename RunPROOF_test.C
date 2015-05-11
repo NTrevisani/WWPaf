@@ -51,9 +51,9 @@ void RunPROOF_test(double luminosity,
   // for details:
   // * kSequential: No PROOF. Plain sequential code
   // * kLite: PROOF Lite mode
-  // * kCluster: PROOF Cluter mode
+  // * kCluster: PROOF Cluster mode
   // * kPoD: PROOF on Demand mode
-  gPAFOptions->proofMode = kLite;
+  gPAFOptions->proofMode = kCluster;
   //
   // Optional parameters for PROOF Cluster (kCluster):
   //   + The number of slots you would like to use (default is 10)
@@ -130,14 +130,31 @@ void RunPROOF_test(double luminosity,
     double xSection =  1.0 ;
     int whichRun = 2; 
   */
+
+    else if (theSample == "MCNLOtest") {
+      gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V09_S2_V10_S3_V17newJEC/MC_TightTight/latino_004_WWto2L2NuMCatNLOUp.root");
+    }
+
+
+    else if (theSample == "WJetsMC") {
+      gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_080_WJetsToLNuMad.root");
+    }
+
+    else if (theSample == "TTbarInclusiveMC") {
+      gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/Systematics2013_nominals_fromMaiko/latino_010_TTJetsMad.root");
+    }
  
-  else if (theSample == "WJetsFakes_Total_old") {
+    else if (theSample == "VBF") {
+      gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V09_S2_V10_S3_V17newJEC/MC_TightTight/latino_050_WWjjMadgraph.root");
+    }
+    
+    else if (theSample == "WJetsFakes_Total_old") {
 
     gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V08_S2_V09_S3_V13/Moriond13/latino_LooseLoose_19.5fb.root");
 
   }
 
-  else if (theSample == "WJetsFakes_Total") {
+    else if (theSample == "WJetsFakes_Total") {
 
     // Using latest jetEt thresholds. 
     gPAFOptions->dataFiles.push_back("/gpfs/csic_projects/tier3data/LatinosSkims/ReducedTrees/R53X_S1_V08_S2_V09_S3_V13/WJet_LooseLoose/latino_RunA_892pbinv_LooseLoose.root");

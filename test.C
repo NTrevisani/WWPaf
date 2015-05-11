@@ -72,7 +72,7 @@ void test::Initialise() {
   // Create histos
   //------------------------------------------------------------------------------
   
-  h_n_PV = CreateH1F("h_n_PV","h_n_PV",10,-5.,5.);
+  h_n_PV = CreateH1F("h_n_PV","h_n_PV",50,0.,10.);
 
   // Counting histograms    
   //---------------------------------------------------------------------------- 
@@ -83,17 +83,24 @@ void test::Initialise() {
   hWZVeto       = CreateH1F("hWZVeto",       "", 10, 0, 10);
   hWpMetCut     = CreateH1F("hWpMetCut",     "", 10, 0, 10);
   hWJetVeto     = CreateH1F("hWJetVeto",     "", 10, 0, 10);
-  hWnJets    = CreateH1F("hWnJets",         "", 10, 0, 10);
-  hWeffnJets = CreateH1F("hWeffnJets",      "", 10, 0, 10);
-  hWnBtaggedJets     = CreateH1F("hWnBtaggedJets",          "", 10, 0, 10);
-  hWeffnBtaggedJets  = CreateH1F("hWeffnBtaggedJets",       "", 10, 0, 10);
+  hWnJets       = CreateH1F("hWnJets",         "", 10, 0, 10);
+  hWeffnJets    = CreateH1F("hWeffnJets",      "", 10, 0, 10);
+
+  hWnBtaggedJets         = CreateH1F("hWnBtaggedJets",         "", 10, 0, 10);
+  hWeffnBtaggedJets      = CreateH1F("hWeffnBtaggedJets",      "", 10, 0, 10);
+  hWnJetsBveto           = CreateH1F("hWnJetsBveto",           "", 10, 0, 10);
+  hWeffnJetsBveto        = CreateH1F("hWeffnJetsBveto",        "", 10, 0, 10);
+  hWnJetsBvetoAfterHt    = CreateH1F("hWnJetsBvetoAfterHt",    "", 10, 0, 10);
+  hWeffnJetsBvetoAfterHt = CreateH1F("hWeffnJetsBvetoAfterHt", "", 10, 0, 10);
   
+  hWnJetsBvetoAfterHtHtPlus    = CreateH1F("hWnJetsBvetoAfterHtHtPlus",         "", 10, 0, 10);
+  hWeffnJetsBvetoAfterHtHtPlus = CreateH1F("hWeffnJetsBvetoAfterHtHtPlus",      "", 10, 0, 10);
+
   hWDeltaPhiJet = CreateH1F("hWDeltaPhiJet", "", 10, 0, 10);
   hWSoftMuVeto  = CreateH1F("hWSoftMuVeto",  "", 10, 0, 10);
   hWExtraLepton = CreateH1F("hWExtraLepton", "", 10, 0, 10);
   hWPtll        = CreateH1F("hWPtll",        "", 10, 0, 10);
   hWTopTagging  = CreateH1F("hWTopTagging",  "", 10, 0, 10);
-
 
   hWeffTrigger     = CreateH1F("hWeffTrigger",     "", 10, 0, 10);
   hWeffMetCut      = CreateH1F("hWeffMetCut",      "", 10, 0, 10);
@@ -117,7 +124,7 @@ void test::Initialise() {
     hPtDiLeptonWWLevel[nC]      = CreateH1F(Form("hPtDiLeptonWWLevel%.1i", nC),      "", 200, 0, 200);
     hMinvWWLevel[nC]            = CreateH1F(Form("hMinvWWLevel%.1i", nC),            "", 200, 0, 200);
     hMtWWLevel[nC]              = CreateH1F(Form("hMtWWLevel%.1i", nC),              "", 250, 0, 250);
-    hNJets30WWLevel[nC]         = CreateH1F(Form("hNJetsPF30WWLevel%.1i", nC),       "",  10, 0,  10);
+    hNJets30WWLevel[nC]         = CreateH1F(Form("hNJets30WWLevel%.1i", nC),       "",  10, 0,  10);
     hpfMetWWLevel[nC]           = CreateH1F(Form("hpfMetWWLevel%.1i", nC),           "", 150, 0, 150);
     hppfMetWWLevel[nC]          = CreateH1F(Form("hppfMetWWLevel%.1i", nC),          "", 150, 0, 150);
     hchMetWWLevel[nC]           = CreateH1F(Form("hchMetWWLevel%.1i", nC),           "", 150, 0, 150);
@@ -128,7 +135,29 @@ void test::Initialise() {
     hDPhiPtllJetWWLevel[nC]     = CreateH1F(Form("hDPhiPtllJetWWLevel%.1i", nC),     "",  32, 0, 3.2);
     hDataEvents[nC]             = CreateH1F(Form("hDataEvents%.1i", nC),             "",  32, 0, 3.2);
     hBackgroundEvents[nC]       = CreateH1F(Form("hBackgroundEvents%.1i", nC),       "",  32, 0, 3.2);
-
+    hMtLepton1WWLevel[nC]       = CreateH1F(Form("hMtLepton1WWLevel%.1i", nC),       "", 200, 0, 200);
+    hMtLepton2WWLevel[nC]       = CreateH1F(Form("hMtLepton2WWLevel%.1i", nC),       "", 200, 0, 200);
+    hMtSumWWLevel[nC]           = CreateH1F(Form("hMtSumWWLevel%.1i", nC),           "", 500, 0, 500);
+    
+    hPtLepton1WWLevelHtPlus[nC]       = CreateH1F(Form("hPtLepton1WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
+    hPtLepton2WWLevelHtPlus[nC]       = CreateH1F(Form("hPtLepton2WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
+    hPtDiLeptonWWLevelHtPlus[nC]      = CreateH1F(Form("hPtDiLeptonWWLevelHtPlus%.1i", nC),      "", 200, 0, 200);
+    hMinvWWLevelHtPlus[nC]            = CreateH1F(Form("hMinvWWLevelHtPlus%.1i", nC),            "", 200, 0, 200);
+    hMtWWLevelHtPlus[nC]              = CreateH1F(Form("hMtWWLevelHtPlus%.1i", nC),              "", 250, 0, 250);
+    hNJets30WWLevelHtPlus[nC]         = CreateH1F(Form("hNJets30WWLevelHtPlus%.1i", nC),       "",  10, 0,  10);
+    hpfMetWWLevelHtPlus[nC]           = CreateH1F(Form("hpfMetWWLevelHtPlus%.1i", nC),           "", 150, 0, 150);
+    hppfMetWWLevelHtPlus[nC]          = CreateH1F(Form("hppfMetWWLevelHtPlus%.1i", nC),          "", 150, 0, 150);
+    hchMetWWLevelHtPlus[nC]           = CreateH1F(Form("hchMetWWLevelHtPlus%.1i", nC),           "", 150, 0, 150);
+    hpchMetWWLevelHtPlus[nC]          = CreateH1F(Form("hpchMetWWLevelHtPlus%.1i", nC),          "", 150, 0, 150);
+    hpminMetWWLevelHtPlus[nC]         = CreateH1F(Form("hpminMetWWLevelHtPlus%.1i", nC),         "", 150, 0, 150);
+    hDeltaRLeptonsWWLevelHtPlus[nC]   = CreateH1F(Form("hDeltaRLeptonsWWLevelHtPlus%.1i", nC),   "",  50, 0,   5);
+    hDeltaPhiLeptonsWWLevelHtPlus[nC] = CreateH1F(Form("hDeltaPhiLeptonsWWLevelHtPlus%.1i", nC), "",  32, 0, 3.2);
+    hDPhiPtllJetWWLevelHtPlus[nC]     = CreateH1F(Form("hDPhiPtllJetWWLevelHtPlus%.1i", nC),     "",  32, 0, 3.2);
+    hDataEventsHtPlus[nC]             = CreateH1F(Form("hDataEventsHtPlus%.1i", nC),             "",  32, 0, 3.2);
+    hBackgroundEventsHtPlus[nC]       = CreateH1F(Form("hBackgroundEventsHtPlus%.1i", nC),       "",  32, 0, 3.2);
+    hMtLepton1WWLevelHtPlus[nC]       = CreateH1F(Form("hMtLepton1WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
+    hMtLepton2WWLevelHtPlus[nC]       = CreateH1F(Form("hMtLepton2WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
+    
     hPtLepton1WWLevelNoHt[nC]       = CreateH1F(Form("hPtLepton1WWLevelNoHt%.1i", nC),       "", 200, 0, 200);
     hPtLepton2WWLevelNoHt[nC]       = CreateH1F(Form("hPtLepton2WWLevelNoHt%.1i", nC),       "", 200, 0, 200);
     hPtDiLeptonWWLevelNoHt[nC]      = CreateH1F(Form("hPtDiLeptonWWLevelNoHt%.1i", nC),      "", 200, 0, 200);
@@ -145,10 +174,17 @@ void test::Initialise() {
     hDPhiPtllJetWWLevelNoHt[nC]     = CreateH1F(Form("hDPhiPtllJetWWLevelNoHt%.1i", nC),     "",  32, 0, 3.2);
     hDataEventsNoHt[nC]             = CreateH1F(Form("hDataEventsNoHt%.1i", nC),             "",  32, 0, 3.2);
     hBackgroundEventsNoHt[nC]       = CreateH1F(Form("hBackgroundEventsNoHt%.1i", nC),       "",  32, 0, 3.2);
+    hMtLepton1WWLevelNoHt[nC]       = CreateH1F(Form("hMtLepton1WWLevelNoHt%.1i", nC),       "", 500, 0, 500);
+    hMtLepton2WWLevelNoHt[nC]       = CreateH1F(Form("hMtLepton2WWLevelNoHt%.1i", nC),       "", 500, 0, 500);
+    hMtSumWWLevelNoHt[nC]           = CreateH1F(Form("hMtSumWWLevelNoHt%.1i", nC),           "", 500, 0, 500);
 
     hHt[nC]                     = CreateH1F(Form("hHt%.1i",               nC),       "", 3000, 0, 3000);
     hHtAfter[nC]                = CreateH1F(Form("hHtAfter%.1i",          nC),       "", 3000, 0, 3000);
+    mllVSmt[nC]                 = CreateH2F(Form("mllVSmt%.1i",           nC),       "", 300,  0, 3000,50,0.,500.);
 
+    hEff[nC]                    = CreateH1F(Form("hEff%.1i", nC),           "", 500, 0, 10);
+    hEffNoHt[nC]                = CreateH1F(Form("hEffNoHt%.1i", nC),       "", 500, 0, 10);
+    hEffHtPlus[nC]              = CreateH1F(Form("hEffHtPlus%.1i", nC),     "", 500, 0, 10);
   }
 
   h_WWLevel_TightFailEvents  = CreateH1F("h_WWLevel_TightFailEvents",  "", 10, 0 , 10);
@@ -177,7 +213,14 @@ void test::Initialise() {
   h_TwoLeptons_TightFailEvents  = CreateH1F("h_TwoLeptons_TightFailEvents",  "", 10, 0 , 10);
   h_TwoLeptons_TightTightEvents = CreateH1F("h_TwoLeptons_TightTightEvents", "", 10, 0 , 10);
   h_TwoLeptons_TightLooseEvents = CreateH1F("h_TwoLeptons_TightLooseEvents", "", 10, 0 , 10);
-  
+  /*
+  hEff                          = CreateH1F("hEff",                          "", 50, 0 ,  10);
+  hEffHt                        = CreateH1F("hEffHt",                        "", 50, 0 ,  10);
+
+  hEff0bin                      = CreateH1F("hEff0bin",                          "", 50, 0 ,  10);
+  hEffHt0bin                    = CreateH1F("hEffHt0bin",                        "", 50, 0 ,  10);
+  */
+
   // Dilepton level differential histograms 
   //----------------------------------------------------------------------------   
   
@@ -203,7 +246,8 @@ void test::Initialise() {
   hDileptonWWLevel_Diff    = CreateH1F("hDileptonWWLevel_Diff",         "", 7, ptllbins);
   hMinvWWLevel_Diff        = CreateH1F("hMinvWWLevel_Diff",             "", 8, mllbins);
   hDeltaPhiWWLevel_Diff    = CreateH1F("hDeltaPhiWWLevel_Diff",         "", 12, dphibins);
-  
+
+ 
   // Data-driven methods: Z+jets 
   //---------------------------------------------------------------------------- 
   
@@ -238,18 +282,19 @@ void test::Initialise() {
 
 
 void test::InsideLoop() {
-  
+
+
   TString TheSample = GetInputParameters()->TheNamedString("theSample");
   
   // The InsideLoop() function is called for each entry in the tree to be processed  
   
   Double_t efficiencyW = effW * triggW;
   Double_t totalW      = -999;
-  
+
+  Float_t nllW = 1; //comment when running samples at nll!!!  
+
   Double_t mybaseW = 1;
   
-  Float_t nllW = 1;
-
   if ( TheSample.Contains("_nnll") ) {
     if ( TheSample.Contains("_pow_") ) mybaseW = 5984.0/999864*1.04976; 
     if ( TheSample.Contains("_mad_") ) mybaseW = 5984.0/1933235*1.04976;
@@ -257,469 +302,528 @@ void test::InsideLoop() {
   }
   
   
-  if ( TheSample.Contains("TTbar")){
+  if ( TheSample == "TTbar"){
     mybaseW = 25289.0/10783509 * 1.04976;
   }
-    
+  
+  if ( TheSample.Contains("Inclusive")){
+    mybaseW = 252890. / 6923750;
+  }
 
   //5812.3/539594; // mcnlo 
   //5812.3/1933235; // madgraph (1933232)
   // 5812.3/999864; // powheg (999860)
   
-    if (TheSample.Contains("Data")){
-      
-      totalW = 1.0;
-    }
+  if (TheSample.Contains("Data")){
     
-    else if (TheSample.Contains("WJetsFakes")) { 
-      totalW = fakeW;
-      
-      if ( dataset >= 82 && dataset <= 86 ) 
-	totalW  = fakeW * (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * baseW * puW * effW * triggW * Luminosity;
-      
-    }
+    totalW = 1.0;
+  }
+  
+  else if (TheSample.Contains("WJetsFakes")) { 
+    totalW = fakeW;
     
-    else if (TheSample.Contains("_nnll") ) {
-      efficiencyW = puW * effW * triggW * nllW;
-      totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * mybaseW * efficiencyW * Luminosity;
-    } 
-    
-      else if (TheSample.Contains("TTbar")){
-      efficiencyW = puW * effW * triggW ;
-      totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * mybaseW * efficiencyW * Luminosity;
-    }
-    
-    else {
-      efficiencyW = puW * effW * triggW ;
-      totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * baseW * efficiencyW * Luminosity;
-    }
-    
-    
-    //cout <<mybaseW << endl;
-    
-    //if (TheSample.Contains("DYtautau") && dataset != 86) totalW *= (19.4/12.1);
-    
-    
-    // Help variables
-    //--------------------------------------------------------------------------
-    //   Int_t dphiv = ((njet <= 1 && dphiveto) || (njet > 1 && dphilljetjet < 165.*TMath::DegToRad()));
-    
-    Int_t dphiv = (njet <= 1 || (njet > 1 && dphilljetjet < 165.*TMath::DegToRad()));
-    
-    Float_t metvar = (njet <= 1) ? mpmet : pfmet;
-
-    Float_t jetbin = njet;
-    
-    Float_t dyMVA = ( !sameflav || ( (njet!=0 || dymva1>0.88) && (njet!=1 || dymva1>0.84) && ( njet==0 || njet==1 || (pfmet > 45.0)) ) );
-    
-    Float_t Ht = 0;
-
-    if (njet == 0)
-      Ht = pt1 + pt2 + pfmet;
-
-
-    if (njet == 1)
-      Ht = pt1 + pt2 + pfmet + jetpt1;
-
-
-    if (njet == 2)
-      Ht = pt1 + pt2 + pfmet + jetpt1 + jetpt2;
-
-
-    if (njet == 3)
-      Ht = pt1 + pt2 + pfmet + jetpt1 + jetpt2 + jetpt3;
-    
-
-    if (njet >= 4)
-      Ht = pt1 + pt2 + pfmet + jetpt1 + jetpt2 + jetpt3 + jetpt4;
+    if ( dataset >= 82 && dataset <= 86 ) 
+      totalW  = fakeW * (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * baseW * puW * effW * triggW * Luminosity;
+  }
 
     
-    if(njet ==4)
-      cout<<njet<<" "<<pt1<<" "<<pt2<<" "<<pfmet<<" "<<jetpt1<<" "<<jetpt2<<" "<<jetpt3<<" "<<jetpt4<<" "<<Ht<<endl;
+  else if (TheSample.Contains("_nnll")) {
+    efficiencyW = puW * effW * triggW * nllW;
+    totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * mybaseW * efficiencyW * Luminosity;
+  } 
+   
+  else if (TheSample.Contains("TTbar")){
+    efficiencyW = puW * effW * triggW ;
+    totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * mybaseW * efficiencyW * Luminosity;
+  }
+  
+  else {
+    efficiencyW = puW * effW * triggW ;
+    totalW      = (1 + 0.5 * (dataset >= 82 && dataset <= 84)) * baseW * efficiencyW * Luminosity;
+  }
+  
+  h_n_PV -> Fill(1,efficiencyW);  
+  
+  //cout <<mybaseW << endl;
+  
+  //if (TheSample.Contains("DYtautau") && dataset != 86) totalW *= (19.4/12.1);
+  
+  
+  // Help variables
+  //--------------------------------------------------------------------------
+  //   Int_t dphiv = ((njet <= 1 && dphiveto) || (njet > 1 && dphilljetjet < 165.*TMath::DegToRad()));
+  
+  Int_t dphiv = (njet <= 1 || (njet > 1 && dphilljetjet < 165.*TMath::DegToRad()));
+  
+  Float_t metvar = (njet <= 1) ? mpmet : pfmet;
+  
+  Float_t jetbin = njet;
     
+  Float_t dyMVA = ( !sameflav || ( (njet!=0 || dymva1>0.88) && (njet!=1 || dymva1>0.84) && ( njet==0 || njet==1 || (pfmet > 45.0)) ) );
+  
+  Float_t Ht = 0;
+  
+  if (njet == 0)
+    Ht = pt1 + pt2 + pfmet;
+  
+  
+  if (njet == 1)
+    Ht = pt1 + pt2 + pfmet + jetpt1;
+  
+  
+  if (njet == 2)
+    Ht = pt1 + pt2 + pfmet + jetpt1 + jetpt2;
+  
+  
+  if (njet == 3)
+    Ht = pt1 + pt2 + pfmet + jetpt1 + jetpt2 + jetpt3;
+  
+  
+  if (njet >= 4)
+    Ht = pt1 + pt2 + pfmet + jetpt1 + jetpt2 + jetpt3 + jetpt4;
+  
+  
+  if(njet ==4)
+    cout<<njet<<" "<<pt1<<" "<<pt2<<" "<<pfmet<<" "<<jetpt1<<" "<<jetpt2<<" "<<jetpt3<<" "<<jetpt4<<" "<<Ht<<endl;
+  
+  Float_t Mt1 = sqrt(2*pt1*pfmet*(1 - cos(dphilmet1)));  
+  Float_t Mt2 = sqrt(2*pt2*pfmet*(1 - cos(dphilmet2)));  
+  
+  //    if (njet == 3) jetbin = 2;  
+  
+  
+  Int_t vbfsel = ((jetpt3 <= 30 || !(jetpt3 > 30 && ((jeteta1-jeteta3 > 0 && jeteta2-jeteta3 < 0) || (jeteta2-jeteta3 > 0 && jeteta1-jeteta3 < 0)))));
 
     
-    //    if (njet == 3) jetbin = 2;  
-    
-    
-    Int_t vbfsel = ((jetpt3 <= 30 || !(jetpt3 > 30 && ((jeteta1-jeteta3 > 0 && jeteta2-jeteta3 < 0) || (jeteta2-jeteta3 > 0 && jeteta1-jeteta3 < 0)))));
-
-    
-    // The selection begins here
-    //--------------------------------------------------------------------------
-    
-    if (TheSample != "DY" || mctruth != 2 || (flavorChannel != "EMu" || flavorChannel != "MuE"))
-      if (run != 201191)
-	if (trigger == 1)
-	  if (pt2 >= 20) //increase the pt of the leptons to further reduce Wjets 
-	    if (pt1 >= 20) //increase the pt of the leptons to further reduce Wjets 
-	      if (ch1*ch2 < 0)
-		if ( (SelectedChannel == -1)                                   || 
-		     (channel == SelectedChannel)                              || 
-		     (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
-		     (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
-		     )//chooses the right decay channel 
-		  {
-
-		    // if (dataset == 86 && (flavorChannel == "MuMu" || flavorChannel == "EE")) continue; 
-		    // After talking Andrea's just removing this condition!! 
-		    /*
-		      if ( (SelectedChannel == -1)                                   || 
-		      (channel == SelectedChannel)                              || 
-		      (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
-		      (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
-		      ) 
-		    */
-		    
-		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // The selection begins here
+  //--------------------------------------------------------------------------
+  
+  if (TheSample != "DY" || mctruth != 2 || (flavorChannel != "EMu" || flavorChannel != "MuE"))
+    if (run != 201191)
+      if (trigger == 1)
+	if (pt2 >= 20) //increase the pt of the leptons to further reduce Wjets 
+	  if (pt1 >= 20) //increase the pt of the leptons to further reduce Wjets 
+	    if (ch1*ch2 < 0)
+	      if ( (SelectedChannel == -1)                                   || 
+		   (channel == SelectedChannel)                              || 
+		   (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
+		   (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
+		   )//chooses the right decay channel 
+		{
+		  
+		  // if (dataset == 86 && (flavorChannel == "MuMu" || flavorChannel == "EE")) continue; 
+		  // After talking Andrea's just removing this condition!! 
+		  /*
+		    if ( (SelectedChannel == -1)                                   || 
+		    (channel == SelectedChannel)                              || 
+		    (SelectedChannel == 4 && (channel == 2 || channel == 3) ) || 
+		    (SelectedChannel == 5 && (channel == 0 || channel == 1) ) 
+		    ) 
+		  */
+		  
+		  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		  //
+		  // Data-driven methods
+		  //
+		  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		  // if (pfmet > 20 && mpmet > 20 && mll > 12 && ptll > 45 && nextra == 0 && (dphiv || !sameflav)) { OLD CUTS
+		  
+		  // if( pfmet > 20 && mpmet > 20 && mll > 12&& nextra == 0 && (dphiv || !sameflav) && dyMVA && ptll>30 && (!sameflav || ptll>45) ) { 
+		  
+		  
+		  if( pfmet > 20 && mpmet > 20 && mll > 12 && nextra == 0 && (dphiv || !sameflav)  && ptll>30 && (!sameflav || ptll>45) ) { 
+		      
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		    //
-		    // Data-driven methods
+		    // Z+jets
 		    //
-		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		    // if (pfmet > 20 && mpmet > 20 && mll > 12 && ptll > 45 && nextra == 0 && (dphiv || !sameflav)) { OLD CUTS
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		    
-		    // if( pfmet > 20 && mpmet > 20 && mll > 12&& nextra == 0 && (dphiv || !sameflav) && dyMVA && ptll>30 && (!sameflav || ptll>45) ) { 
+		    //if (dphiv && jetbin == jetChannel && bveto_mu && (bveto_ip && (nbjettche == 0 || njet > 3))) { OLD CUTS
 		    
-		    
-		    if( pfmet > 20 && mpmet > 20 && mll > 12 && nextra == 0 && (dphiv || !sameflav)  && ptll>30 && (!sameflav || ptll>45) ) { 
+		    if( jetbin == jetChannel && bveto_mu && bveto_ip==1 && nbjettche==0 && ptll > 45) { 
 		      
-		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		      //
-		      // Z+jets
-		      //
-		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		      
-		      //if (dphiv && jetbin == jetChannel && bveto_mu && (bveto_ip && (nbjettche == 0 || njet > 3))) { OLD CUTS
-		      
-		      if( jetbin == jetChannel && bveto_mu && bveto_ip==1 && nbjettche==0 && ptll > 45) { 
-	  
-			// Loop over the metvar bins -------------> why only jetbin == 0 and jetbin == 1 ?? ////Z+jets doesn't have more than 1 jet??/////
-			//--------------------------------------------------------------------
-			for (size_t mc=0; mc<numberDYMVACuts; mc ++) {
-			  
-			  if ( jetbin == 0 ) { 
-	      
-			    if ( dymva1 > DYMVACut_0j[mc] && fabs(mll - ZMASS) < 7.5) {
-			      hNinLooseZevents[mc]->Fill(1,totalW);
-			    }
-			    
-			    if (dymva1 > DYMVACut_0j[mc] && dymva1 < DYMVACut_0j[mc+1]) {   
-			      if (fabs(mll - ZMASS) < 7.5) {
-				hNinZevents[mc]   ->Fill(  1, totalW);
-				hMassInZevents[mc]->Fill(mll, totalW);
-			      }
-			      else if (fabs(mll - ZMASS) > 15) {  
-				hNoutZevents[mc]   ->Fill(  1, totalW);
-				hMassOutZevents[mc]->Fill(mll, totalW);
-			      }
-			    }
-			  }
-			  
-			  if ( jetbin == 1 ) { 
-			    
-			    if ( dymva1 > DYMVACut_1j[mc] && fabs(mll - ZMASS) < 7.5) {
-			      hNinLooseZevents[mc]->Fill(1,totalW);
-			    }
-			    
-			    if (dymva1 > DYMVACut_1j[mc] && dymva1 < DYMVACut_1j[mc+1]) {   
-			      if (fabs(mll - ZMASS) < 7.5) {
-				hNinZevents[mc]   ->Fill(  1, totalW);
-				hMassInZevents[mc]->Fill(mll, totalW);
-			      }
-			      else if (fabs(mll - ZMASS) > 15) {  
-				hNoutZevents[mc]   ->Fill(  1, totalW);
-				hMassOutZevents[mc]->Fill(mll, totalW);
-			      }
-			    }
-			  }
-			  
-			  
-			}
-		      }
-		      
-		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		      //
-		      // Top
-		      //
-		      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		      
-		      //   if (zveto  && metvar > (20 + 25*sameflav)) { OLD CUTS
-
-		      if ( zveto && dyMVA ) {
+		      // Loop over the metvar bins -------------> why only jetbin == 0 and jetbin == 1 ?? ////Z+jets doesn't have more than 1 jet??/////
+		      //--------------------------------------------------------------------
+		      for (size_t mc=0; mc<numberDYMVACuts; mc ++) {
 			
-			// btag_eff denominator
-			if ((jetChannel == 0 && njet == 1 && nbjet == 1) || // jetBProbabilityBJetTags discriminator
-			    (jetChannel == 1 && njet == 2 && jettche2 > 2.1) ||
-			    (jetChannel == 2)) {
+			if ( jetbin == 0 ) { 
 			  
-			  hNTopControlRegion->Fill(1, totalW);
-			  hbTagDisNTopControlRegion->Fill(jettche2, totalW);
+			  if ( dymva1 > DYMVACut_0j[mc] && fabs(mll - ZMASS) < 7.5) {
+			    hNinLooseZevents[mc]->Fill(1,totalW);
+			  }
 			  
-			  // btag_eff numerator
-			  if ((jetChannel == 0 && !bveto_nj30) || // bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto for jetPt<30 
-			      (jetChannel == 1 && jettche1 > 2.1) ||
-			      (jetChannel == 2)) {
-			    
-			    hNTopTaggedTopControlRegion->Fill(1, totalW);
-			    hbTagDisNTopTaggedTopControlRegion->Fill(jettche2, totalW);
+			  if (dymva1 > DYMVACut_0j[mc] && dymva1 < DYMVACut_0j[mc+1]) {   
+			    if (fabs(mll - ZMASS) < 7.5) {
+			      hNinZevents[mc]   ->Fill(  1, totalW);
+			      hMassInZevents[mc]->Fill(mll, totalW);
+			    }
+			    else if (fabs(mll - ZMASS) > 15) {  
+			      hNoutZevents[mc]   ->Fill(  1, totalW);
+			      hMassOutZevents[mc]->Fill(mll, totalW);
+			    }
 			  }
 			}
-		      }
-
-		      // Top-tagged events for ttbar estimation
-		      //----------------------------------------------------------------------
-		      if (zveto && dyMVA) {
 			
-			if ((jetChannel == 0 && njet == 0 && !bveto) ||
-			    (jetChannel == 1 && njet == 1 && bveto && jettche1 > 2.1) || // bveto == bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto (no pt requirement)
+			if ( jetbin == 1 ) { 
+			  
+			  if ( dymva1 > DYMVACut_1j[mc] && fabs(mll - ZMASS) < 7.5) {
+			    hNinLooseZevents[mc]->Fill(1,totalW);
+			  }
+			  
+			  if (dymva1 > DYMVACut_1j[mc] && dymva1 < DYMVACut_1j[mc+1]) {   
+			    if (fabs(mll - ZMASS) < 7.5) {
+			      hNinZevents[mc]   ->Fill(  1, totalW);
+			      hMassInZevents[mc]->Fill(mll, totalW);
+			    }
+			    else if (fabs(mll - ZMASS) > 15) {  
+			      hNoutZevents[mc]   ->Fill(  1, totalW);
+			      hMassOutZevents[mc]->Fill(mll, totalW);
+			    }
+			  }
+			}
+			
+			
+		      }
+		    }
+		    
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    //
+		    // Top
+		    //
+		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    
+		    //   if (zveto  && metvar > (20 + 25*sameflav)) { OLD CUTS
+		    
+		    if ( zveto && dyMVA ) {
+		      
+		      // btag_eff denominator
+		      if ((jetChannel == 0 && njet == 1 && nbjet == 1) || // jetBProbabilityBJetTags discriminator
+			  (jetChannel == 1 && njet == 2 && jettche2 > 2.1) ||
+			  (jetChannel == 2)) {
+			
+			hNTopControlRegion->Fill(1, totalW);
+			hbTagDisNTopControlRegion->Fill(jettche2, totalW);
+			
+			// btag_eff numerator
+			if ((jetChannel == 0 && !bveto_nj30) || // bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto for jetPt<30 
+			    (jetChannel == 1 && jettche1 > 2.1) ||
 			    (jetChannel == 2)) {
 			  
-			  hTopTaggedEvents->Fill(1, totalW);
-			  hbTagDisTopTaggedEvents->Fill(jettche2, totalW);
+			  hNTopTaggedTopControlRegion->Fill(1, totalW);
+			  hbTagDisNTopTaggedTopControlRegion->Fill(jettche2, totalW);
 			}
 		      }
 		    }
 		    
-		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		    //
-		    // Main analisis
-		    //
-		    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		    
-		    hWTrigger   ->Fill(1, totalW); 
-		    hWeffTrigger->Fill(1, efficiencyW);
-		    
-		    hPtLepton1TwoLeptonsLevel      ->Fill(pt1,       totalW);
-		    hPtLepton2TwoLeptonsLevel      ->Fill(pt2,       totalW);
-		    hPtDiLeptonTwoLeptonsLevel     ->Fill(ptll,      totalW);
-		    hMinvTwoLeptonsLevel           ->Fill(mll,       totalW);
-		    hMtTwoLeptonsLevel             ->Fill(mth,       totalW);
-		    hNJets30TwoLeptonsLevel        ->Fill(njet,      totalW);
-		    hpfMetTwoLeptonsLevel          ->Fill(pfmet,     totalW);
-		    hppfMetTwoLeptonsLevel         ->Fill(ppfmet,    totalW);
-		    hchMetTwoLeptonsLevel          ->Fill(chmet,     totalW);
-		    hpchMetTwoLeptonsLevel         ->Fill(pchmet,    totalW);
-		    hpminMetTwoLeptonsLevel        ->Fill(mpmet,     totalW);
-		    hDeltaRLeptonsTwoLeptonsLevel  ->Fill(drll,      totalW);
-		    hDeltaPhiLeptonsTwoLeptonsLevel->Fill(dphill,    totalW);
-		    hDPhiPtllJetTwoLeptonsLevel    ->Fill(dphilljet, totalW);
-		    
-		    //if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
-		    h_TwoLeptons_TightFailEvents ->Fill(1, totalW); 
-		    
-		    if ( pass2012ICHEP1 && pass2012ICHEP2) 
-		      h_TwoLeptons_TightTightEvents ->Fill(1, totalW); 
-		    
-		    if ( pass2012ICHEP1 || pass2012ICHEP2) 
-		      h_TwoLeptons_TightLooseEvents ->Fill(1, totalW); 
-		    
-		    if (nextra == 0) {
+		    // Top-tagged events for ttbar estimation
+		    //----------------------------------------------------------------------
+		    if (zveto && dyMVA) {
 		      
-		      hWExtraLepton->Fill(1, totalW);
-		      hWeffExtraLepton->Fill(1, efficiencyW);
+		      if ((jetChannel == 0 && njet == 0 && !bveto) ||
+			  (jetChannel == 1 && njet == 1 && bveto && jettche1 > 2.1) || // bveto == bveto_nj30 == tche>2.1 && jetPt[10,30] && softMuonVeto (no pt requirement)
+			  (jetChannel == 2)) {
+			
+			hTopTaggedEvents->Fill(1, totalW);
+			hbTagDisTopTaggedEvents->Fill(jettche2, totalW);
+		      }
+		    }
+		  }
+		  
+		  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		  //
+		  // Main analisis
+		  //
+		  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		  
+		  hWTrigger   ->Fill(1, totalW); 
+		  hWeffTrigger->Fill(1, efficiencyW);
+		  
+		  hPtLepton1TwoLeptonsLevel      ->Fill(pt1,       totalW);
+		  hPtLepton2TwoLeptonsLevel      ->Fill(pt2,       totalW);
+		  hPtDiLeptonTwoLeptonsLevel     ->Fill(ptll,      totalW);
+		  hMinvTwoLeptonsLevel           ->Fill(mll,       totalW);
+		  hMtTwoLeptonsLevel             ->Fill(mth,       totalW);
+		  hNJets30TwoLeptonsLevel        ->Fill(njet,      totalW);
+		  hpfMetTwoLeptonsLevel          ->Fill(pfmet,     totalW);
+		  hppfMetTwoLeptonsLevel         ->Fill(ppfmet,    totalW);
+		  hchMetTwoLeptonsLevel          ->Fill(chmet,     totalW);
+		  hpchMetTwoLeptonsLevel         ->Fill(pchmet,    totalW);
+		  hpminMetTwoLeptonsLevel        ->Fill(mpmet,     totalW);
+		  hDeltaRLeptonsTwoLeptonsLevel  ->Fill(drll,      totalW);
+		  hDeltaPhiLeptonsTwoLeptonsLevel->Fill(dphill,    totalW);
+		  hDPhiPtllJetTwoLeptonsLevel    ->Fill(dphilljet, totalW);
+		  
+		  //if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
+		  h_TwoLeptons_TightFailEvents ->Fill(1, totalW); 
+		  
+		  if ( pass2012ICHEP1 && pass2012ICHEP2) 
+		    h_TwoLeptons_TightTightEvents ->Fill(1, totalW); 
+		  
+		  if ( pass2012ICHEP1 || pass2012ICHEP2) 
+		    h_TwoLeptons_TightLooseEvents ->Fill(1, totalW); 
+		  
+		  if (nextra == 0) {
+		    
+		    hWExtraLepton->Fill(1, totalW);
+		    hWeffExtraLepton->Fill(1, efficiencyW);
+		    
+		    if (pfmet > 20 ) { // removed for differential xsec
 		      
-		      if (pfmet > 20 ) { // removed for differential xsec
+		      hWMetCut->Fill(1, totalW);
+		      hWeffMetCut->Fill(1, efficiencyW);
+		      
+		      if (mll > 12) {
 			
-			hWMetCut->Fill(1, totalW);
-			hWeffMetCut->Fill(1, efficiencyW);
+			hWLowMinv->Fill(1, totalW);
+			hWeffLowMinv->Fill(1, efficiencyW);
 			
-			if (mll > 12) {
+			if (zveto==1 || !sameflav) {
 			  
-			  hWLowMinv->Fill(1, totalW);
-			  hWeffLowMinv->Fill(1, efficiencyW);
+			  hWZVeto->Fill(1, totalW); 
+			  hWeffZVeto->Fill(1, efficiencyW); 
 			  
-			  if (zveto==1 || !sameflav) {
+			  if (mpmet > 20  && dyMVA ) { 
 			    
-			    hWZVeto->Fill(1, totalW); 
-			    hWeffZVeto->Fill(1, efficiencyW); 
+			    hWpMetCut->Fill(1, totalW);
+			    hWeffpMetCut->Fill(1, efficiencyW);		  
 			    
-			    if (mpmet > 20  && dyMVA ) { 
+			    if (dphiv || !sameflav) {
 			      
-			      hWpMetCut->Fill(1, totalW);
-			      hWeffpMetCut->Fill(1, efficiencyW);		  
+			      hWDeltaPhiJet->Fill(1, totalW);
+			      hWeffDeltaPhiJet->Fill(1, efficiencyW);
 			      
-			      if (dphiv || !sameflav) {
+			      if ( ptll>30 && (!sameflav || ptll>45) ) {
 				
-				hWDeltaPhiJet->Fill(1, totalW);
-				hWeffDeltaPhiJet->Fill(1, efficiencyW);
+				hWPtll->Fill(1, totalW);
+				hWeffPtll->Fill(1, efficiencyW);
 				
-				if ( ptll>30 && (!sameflav || ptll>45) ) {
+				/*if (jetbin == jetChannel)*/ {
 				  
-				  hWPtll->Fill(1, totalW);
-				  hWeffPtll->Fill(1, efficiencyW);
+				  hWJetVeto->Fill(1, totalW);
+				  hWeffJetVeto->Fill(1, efficiencyW);
 				  
-				  /*if (jetbin == jetChannel)*/ {
-				    
-				    hWJetVeto->Fill(1, totalW);
-				    hWeffJetVeto->Fill(1, efficiencyW);
-				    
-				    hWnJets->Fill(njet, totalW);
-				    hWeffnJets->Fill(njet, efficiencyW);
-
-				    hWnBtaggedJets->Fill(nbjet, totalW);
-				    hWeffnBtaggedJets->Fill(nbjet, efficiencyW);
-
-				    for (Int_t jetNumber = 0; jetNumber < 3 ; ++jetNumber){
-				      if (jetbin >= 3) jetbin = 2;
-				      if(jetNumber == jetbin){
-					hHt[jetNumber]->Fill(Ht,totalW);				    
-				      }
+				  hWnJets->Fill(njet, totalW);
+				  hWeffnJets->Fill(njet, efficiencyW);
+				  
+				  hWnBtaggedJets->Fill(nbjet, totalW);
+				  hWeffnBtaggedJets->Fill(nbjet, efficiencyW);
+				  
+				  for (Int_t jetNumber = 0; jetNumber < 3 ; ++jetNumber){
+				    if (jetbin >= 3) jetbin = 2;
+				    if(jetNumber == jetbin){
+				      hHt[jetNumber]->Fill(Ht,totalW);				    
 				    }
-					
-				    hHt[3]->Fill(Ht,totalW);				    
-
+				  }
+				  
+				  hHt[3]->Fill(Ht,totalW);				    
+				  
+				  //b-veto
+				  if (bveto_ip==1 && nbjettche==0) {
+				    
+				    hWTopTagging->Fill(1, totalW);
+				    hWeffTopTagging->Fill(1, efficiencyW);
+				      
 				    //b-veto
-				    if (bveto_ip==1 && nbjettche==0) {
+				    if (bveto_mu) { //--> third soft lepton with pt> 3GeV
+					
+				      hWSoftMuVeto->Fill(1, totalW);
+				      hWeffSoftMuVeto->Fill(1, efficiencyW);
 				      
-				      hWTopTagging->Fill(1, totalW);
-				      hWeffTopTagging->Fill(1, efficiencyW);
+				      hHtAfter[3]->Fill(Ht,totalW);				    
 				      
-				      //b-veto
-				      if (bveto_mu) { //--> third soft lepton with pt> 3GeV
-					
-					hWSoftMuVeto->Fill(1, totalW);
-					hWeffSoftMuVeto->Fill(1, efficiencyW);
-					
-					hHtAfter[3]->Fill(Ht,totalW);				    
-					
-					hPtLepton1WWLevelNoHt[3]      ->Fill(pt1,       totalW);
-					hPtLepton2WWLevelNoHt[3]      ->Fill(pt2,       totalW);
-					hPtDiLeptonWWLevelNoHt[3]     ->Fill(ptll,      totalW);
-					hMinvWWLevelNoHt[3]           ->Fill(mll,       totalW);
-					hMtWWLevelNoHt[3]             ->Fill(mth,       totalW);
-					hNJets30WWLevelNoHt[3]        ->Fill(jetbin,    totalW);
-					hpfMetWWLevelNoHt[3]          ->Fill(pfmet,     totalW);
-					hppfMetWWLevelNoHt[3]         ->Fill(ppfmet,    totalW);
-					hchMetWWLevelNoHt[3]          ->Fill(chmet,     totalW);
-					hpchMetWWLevelNoHt[3]         ->Fill(pchmet,    totalW);
-					hpminMetWWLevelNoHt[3]        ->Fill(mpmet,     totalW);
-					hDeltaRLeptonsWWLevelNoHt[3]  ->Fill(drll,      totalW);
-					hDeltaPhiLeptonsWWLevelNoHt[3]->Fill(dphill,    totalW);
-					hDPhiPtllJetWWLevelNoHt[3]    ->Fill(dphilljet, totalW);
-
-					//bveto  
-					if(Ht < 250){
-					  
-					  hPtLepton1WWLevel[3]      ->Fill(pt1,       totalW);
-					  hPtLepton2WWLevel[3]      ->Fill(pt2,       totalW);
-					  hPtDiLeptonWWLevel[3]     ->Fill(ptll,      totalW);
-					  hMinvWWLevel[3]           ->Fill(mll,       totalW);
-					  hMtWWLevel[3]             ->Fill(mth,       totalW);
-					  hNJets30WWLevel[3]        ->Fill(jetbin,    totalW);
-					  hpfMetWWLevel[3]          ->Fill(pfmet,     totalW);
-					  hppfMetWWLevel[3]         ->Fill(ppfmet,    totalW);
-					  hchMetWWLevel[3]          ->Fill(chmet,     totalW);
-					  hpchMetWWLevel[3]         ->Fill(pchmet,    totalW);
-					  hpminMetWWLevel[3]        ->Fill(mpmet,     totalW);
-					  hDeltaRLeptonsWWLevel[3]  ->Fill(drll,      totalW);
-					  hDeltaPhiLeptonsWWLevel[3]->Fill(dphill,    totalW);
-					  hDPhiPtllJetWWLevel[3]    ->Fill(dphilljet, totalW);
-					}
-					
-					  					  
-					for (Int_t jetNumber = 0; jetNumber < 3 ; ++jetNumber){
-					  if (jetbin >= 3) jetbin = 2;
-					  if(jetNumber == jetbin){
-
-					    hHtAfter[jetNumber]                   ->Fill(Ht,        totalW);				    
-					    hPtLepton1WWLevelNoHt[jetNumber]      ->Fill(pt1,       totalW);
-					    hPtLepton2WWLevelNoHt[jetNumber]      ->Fill(pt2,       totalW);
-					    hPtDiLeptonWWLevelNoHt[jetNumber]     ->Fill(ptll,      totalW);
-					    hMinvWWLevelNoHt[jetNumber]           ->Fill(mll,       totalW);
-					    hMtWWLevelNoHt[jetNumber]             ->Fill(mth,       totalW);
-					    hNJets30WWLevelNoHt[jetNumber]        ->Fill(jetNumber, totalW);
-					    hpfMetWWLevelNoHt[jetNumber]          ->Fill(pfmet,     totalW);
-					    hppfMetWWLevelNoHt[jetNumber]         ->Fill(ppfmet,    totalW);
-					    hchMetWWLevelNoHt[jetNumber]          ->Fill(chmet,     totalW);
-					    hpchMetWWLevelNoHt[jetNumber]         ->Fill(pchmet,    totalW);
-					    hpminMetWWLevelNoHt[jetNumber]        ->Fill(mpmet,     totalW);
-					    hDeltaRLeptonsWWLevelNoHt[jetNumber]  ->Fill(drll,      totalW);
-					    hDeltaPhiLeptonsWWLevelNoHt[jetNumber]->Fill(dphill,    totalW);
-					    hDPhiPtllJetWWLevelNoHt[jetNumber]    ->Fill(dphilljet, totalW);
-					    
-					    //bveto  
-					    if(Ht < 250){
-					      
-					      hPtLepton1WWLevel[jetNumber]      ->Fill(pt1,       totalW);
-					      hPtLepton2WWLevel[jetNumber]      ->Fill(pt2,       totalW);
-					      hPtDiLeptonWWLevel[jetNumber]     ->Fill(ptll,      totalW);
-					      hMinvWWLevel[jetNumber]           ->Fill(mll,       totalW);
-					      hMtWWLevel[jetNumber]             ->Fill(mth,       totalW);
-					      hNJets30WWLevel[jetNumber]        ->Fill(jetNumber, totalW);
-					      hpfMetWWLevel[jetNumber]          ->Fill(pfmet,     totalW);
-					      hppfMetWWLevel[jetNumber]         ->Fill(ppfmet,    totalW);
-					      hchMetWWLevel[jetNumber]          ->Fill(chmet,     totalW);
-					      hpchMetWWLevel[jetNumber]         ->Fill(pchmet,    totalW);
-					      hpminMetWWLevel[jetNumber]        ->Fill(mpmet,     totalW);
-					      hDeltaRLeptonsWWLevel[jetNumber]  ->Fill(drll,      totalW);
-					      hDeltaPhiLeptonsWWLevel[jetNumber]->Fill(dphill,    totalW);
-					      hDPhiPtllJetWWLevel[jetNumber]    ->Fill(dphilljet, totalW);
-					    }
-					    /*			    
-								    if (TheSample.Contains("Data")){
-								    hDataEvents[jetNumber]          ->Fill(1);
-								    }
-								    else{
-								    hBackgroundEvents[jetNumber]    ->Fill(1,totalW);
-								    }*/
-					  }  
-					  
-					  }
-					hPtLepton1WWLevel_Diff  ->Fill(pt1,       totalW);
-					hEtaLepton1WWLevel_Diff ->Fill(eta1,      totalW);
-					hDileptonWWLevel_Diff   ->Fill(ptll,      totalW);
-					hMinvWWLevel_Diff       ->Fill(mll,       totalW);
-					hDeltaPhiWWLevel_Diff   ->Fill(dphill,    totalW);
-					
-					//if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
-					h_WWLevel_TightFailEvents ->Fill(1, totalW); 
-					  
-					if ( (pass2012ICHEP1 && pass2012ICHEP2)) 
-					  h_WWLevel_TightTightEvents ->Fill(1, totalW); 
-					
-					if ( pass2012ICHEP1 || pass2012ICHEP2) 
-					  h_WWLevel_TightLooseEvents ->Fill(1, totalW); 
-					
+				      hPtLepton1WWLevelNoHt[3]      ->Fill(pt1,       totalW);
+				      hPtLepton2WWLevelNoHt[3]      ->Fill(pt2,       totalW);
+				      hPtDiLeptonWWLevelNoHt[3]     ->Fill(ptll,      totalW);
+				      hMinvWWLevelNoHt[3]           ->Fill(mll,       totalW);
+				      hMtWWLevelNoHt[3]             ->Fill(mth,       totalW);
+				      hNJets30WWLevelNoHt[3]        ->Fill(jetbin,    totalW);
+				      hpfMetWWLevelNoHt[3]          ->Fill(pfmet,     totalW);
+				      hppfMetWWLevelNoHt[3]         ->Fill(ppfmet,    totalW);
+				      hchMetWWLevelNoHt[3]          ->Fill(chmet,     totalW);
+				      hpchMetWWLevelNoHt[3]         ->Fill(pchmet,    totalW);
+				      hpminMetWWLevelNoHt[3]        ->Fill(mpmet,     totalW);
+				      hDeltaRLeptonsWWLevelNoHt[3]  ->Fill(drll,      totalW);
+				      hDeltaPhiLeptonsWWLevelNoHt[3]->Fill(dphill,    totalW);
+				      hDPhiPtllJetWWLevelNoHt[3]    ->Fill(dphilljet, totalW);
+				      hWnJetsBveto                  ->Fill(njet,      totalW);
+				      hWeffnJetsBveto               ->Fill(njet, efficiencyW);
+				      hEffNoHt[3]                   ->Fill(1,    efficiencyW);
+				      hMtLepton1WWLevelNoHt[3]      ->Fill(Mt1,       totalW);
+				      hMtLepton2WWLevelNoHt[3]      ->Fill(Mt2,       totalW);
+				      hMtSumWWLevelNoHt[3]          ->Fill(Mt1 + Mt2, totalW);
+				      
+				      //bveto Ht 
+				      if(Ht < 250){
+					hPtLepton1WWLevel[3]      ->Fill(pt1,       totalW);
+					hPtLepton2WWLevel[3]      ->Fill(pt2,       totalW);
+					hPtDiLeptonWWLevel[3]     ->Fill(ptll,      totalW);
+					hMinvWWLevel[3]           ->Fill(mll,       totalW);
+					hMtWWLevel[3]             ->Fill(mth,       totalW);
+					hNJets30WWLevel[3]        ->Fill(jetbin,    totalW);
+					hpfMetWWLevel[3]          ->Fill(pfmet,     totalW);
+					hppfMetWWLevel[3]         ->Fill(ppfmet,    totalW);
+					hchMetWWLevel[3]          ->Fill(chmet,     totalW);
+					hpchMetWWLevel[3]         ->Fill(pchmet,    totalW);
+					hpminMetWWLevel[3]        ->Fill(mpmet,     totalW);
+					hDeltaRLeptonsWWLevel[3]  ->Fill(drll,      totalW);
+					hDeltaPhiLeptonsWWLevel[3]->Fill(dphill,    totalW);
+					hDPhiPtllJetWWLevel[3]    ->Fill(dphilljet, totalW);
+					hWnJetsBvetoAfterHt       ->Fill(njet,      totalW);
+					hWeffnJetsBvetoAfterHt    ->Fill(njet, efficiencyW);					
+					hEff[3]                   ->Fill(1,    efficiencyW);					
+					hMtLepton1WWLevel[3]      ->Fill(Mt1,       totalW);
+					hMtLepton2WWLevel[3]      ->Fill(Mt2,       totalW);
+					hMtSumWWLevel[3]          ->Fill(Mt1 + Mt2, totalW);
+					mllVSmt[3]                ->Fill(mll, Mt1 + Mt2, totalW);
 				      }
+				      
+				      if(Ht > 250){
+					hPtLepton1WWLevelHtPlus[3]      ->Fill(pt1,       totalW);
+					hPtLepton2WWLevelHtPlus[3]      ->Fill(pt2,       totalW);
+					hPtDiLeptonWWLevelHtPlus[3]     ->Fill(ptll,      totalW);
+					hMinvWWLevelHtPlus[3]           ->Fill(mll,       totalW);
+					hMtWWLevelHtPlus[3]             ->Fill(mth,       totalW);
+					hNJets30WWLevelHtPlus[3]        ->Fill(jetbin,    totalW);
+					hpfMetWWLevelHtPlus[3]          ->Fill(pfmet,     totalW);
+					hppfMetWWLevelHtPlus[3]         ->Fill(ppfmet,    totalW);
+					hchMetWWLevelHtPlus[3]          ->Fill(chmet,     totalW);
+					hpchMetWWLevelHtPlus[3]         ->Fill(pchmet,    totalW);
+					hpminMetWWLevelHtPlus[3]        ->Fill(mpmet,     totalW);
+					hDeltaRLeptonsWWLevelHtPlus[3]  ->Fill(drll,      totalW);
+					hDeltaPhiLeptonsWWLevelHtPlus[3]->Fill(dphill,    totalW);
+					hDPhiPtllJetWWLevelHtPlus[3]    ->Fill(dphilljet, totalW);
+					hWnJetsBvetoAfterHtHtPlus       ->Fill(njet,      totalW);
+					hWeffnJetsBvetoAfterHtHtPlus    ->Fill(njet, efficiencyW);					
+					hEffHtPlus[3]                   ->Fill(1,    efficiencyW);					
+					hMtLepton1WWLevelHtPlus[3]      ->Fill(Mt1,       totalW);
+					hMtLepton2WWLevelHtPlus[3]      ->Fill(Mt2,       totalW);
+					}
+				      
+				      for (Int_t jetNumber = 0; jetNumber < 3 ; ++jetNumber){
+					if (jetbin >= 3) jetbin = 2;
+					if(jetNumber == jetbin){
+					  
+					  hHtAfter[jetNumber]                   ->Fill(Ht,        totalW);				    
+					  hPtLepton1WWLevelNoHt[jetNumber]      ->Fill(pt1,       totalW);
+					  hPtLepton2WWLevelNoHt[jetNumber]      ->Fill(pt2,       totalW);
+					  hPtDiLeptonWWLevelNoHt[jetNumber]     ->Fill(ptll,      totalW);
+					  hMinvWWLevelNoHt[jetNumber]           ->Fill(mll,       totalW);
+					  hMtWWLevelNoHt[jetNumber]             ->Fill(mth,       totalW);
+					  hNJets30WWLevelNoHt[jetNumber]        ->Fill(jetNumber, totalW);
+					  hpfMetWWLevelNoHt[jetNumber]          ->Fill(pfmet,     totalW);
+					  hppfMetWWLevelNoHt[jetNumber]         ->Fill(ppfmet,    totalW);
+					  hchMetWWLevelNoHt[jetNumber]          ->Fill(chmet,     totalW);
+					  hpchMetWWLevelNoHt[jetNumber]         ->Fill(pchmet,    totalW);
+					  hpminMetWWLevelNoHt[jetNumber]        ->Fill(mpmet,     totalW);
+					  hDeltaRLeptonsWWLevelNoHt[jetNumber]  ->Fill(drll,      totalW);
+					  hDeltaPhiLeptonsWWLevelNoHt[jetNumber]->Fill(dphill,    totalW);
+					  hDPhiPtllJetWWLevelNoHt[jetNumber]    ->Fill(dphilljet, totalW);
+					  hMtLepton1WWLevelNoHt[jetNumber]      ->Fill(Mt1,       totalW);
+					  hMtLepton2WWLevelNoHt[jetNumber]      ->Fill(Mt2,       totalW);
+					  hMtSumWWLevelNoHt[jetNumber]          ->Fill(Mt1 + Mt2, totalW);
+					  hEffNoHt[jetNumber]                   ->Fill(1,    efficiencyW);
+
+					  //bveto Ht  
+					  if(Ht < 250){
+					    hPtLepton1WWLevel[jetNumber]      ->Fill(pt1,       totalW);
+					    hPtLepton2WWLevel[jetNumber]      ->Fill(pt2,       totalW);
+					    hPtDiLeptonWWLevel[jetNumber]     ->Fill(ptll,      totalW);
+					    hMinvWWLevel[jetNumber]           ->Fill(mll,       totalW);
+					    hMtWWLevel[jetNumber]             ->Fill(mth,       totalW);
+					    hNJets30WWLevel[jetNumber]        ->Fill(jetNumber, totalW);
+					    hpfMetWWLevel[jetNumber]          ->Fill(pfmet,     totalW);
+					    hppfMetWWLevel[jetNumber]         ->Fill(ppfmet,    totalW);
+					    hchMetWWLevel[jetNumber]          ->Fill(chmet,     totalW);
+					    hpchMetWWLevel[jetNumber]         ->Fill(pchmet,    totalW);
+					    hpminMetWWLevel[jetNumber]        ->Fill(mpmet,     totalW);
+					    hDeltaRLeptonsWWLevel[jetNumber]  ->Fill(drll,      totalW);
+					    hDeltaPhiLeptonsWWLevel[jetNumber]->Fill(dphill,    totalW);
+					    hDPhiPtllJetWWLevel[jetNumber]    ->Fill(dphilljet, totalW);
+					    hMtLepton1WWLevel[jetNumber]      ->Fill(Mt1,       totalW);
+					    hMtLepton2WWLevel[jetNumber]      ->Fill(Mt2,       totalW);
+					    hMtSumWWLevel[jetNumber]          ->Fill(Mt1 + Mt2, totalW);
+					    mllVSmt[jetNumber]                ->Fill(mll, Mt1 + Mt2, totalW);
+					    hEff[jetNumber]                   ->Fill(1,    efficiencyW);
+					  }
+					  
+					  if(Ht > 250){
+					    hPtLepton1WWLevelHtPlus[jetNumber]      ->Fill(pt1,       totalW);
+					    hPtLepton2WWLevelHtPlus[jetNumber]      ->Fill(pt2,       totalW);
+					    hPtDiLeptonWWLevelHtPlus[jetNumber]     ->Fill(ptll,      totalW);
+					    hMinvWWLevelHtPlus[jetNumber]           ->Fill(mll,       totalW);
+					    hMtWWLevelHtPlus[jetNumber]             ->Fill(mth,       totalW);
+					    hNJets30WWLevelHtPlus[jetNumber]        ->Fill(jetNumber, totalW);
+					    hpfMetWWLevelHtPlus[jetNumber]          ->Fill(pfmet,     totalW);
+					    hppfMetWWLevelHtPlus[jetNumber]         ->Fill(ppfmet,    totalW);
+					    hchMetWWLevelHtPlus[jetNumber]          ->Fill(chmet,     totalW);
+					    hpchMetWWLevelHtPlus[jetNumber]         ->Fill(pchmet,    totalW);
+					    hpminMetWWLevelHtPlus[jetNumber]        ->Fill(mpmet,     totalW);
+					    hDeltaRLeptonsWWLevelHtPlus[jetNumber]  ->Fill(drll,      totalW);
+					    hDeltaPhiLeptonsWWLevelHtPlus[jetNumber]->Fill(dphill,    totalW);
+					    hDPhiPtllJetWWLevelHtPlus[jetNumber]    ->Fill(dphilljet, totalW);
+					    hMtLepton1WWLevelHtPlus[jetNumber]      ->Fill(Mt1,       totalW);
+					    hMtLepton2WWLevelHtPlus[jetNumber]      ->Fill(Mt2,       totalW);
+					    hEffHtPlus[jetNumber]                   ->Fill(1,    efficiencyW);
+					    }
+					  
+					}
+				      }
+				      hPtLepton1WWLevel_Diff  ->Fill(pt1,       totalW);
+				      hEtaLepton1WWLevel_Diff ->Fill(eta1,      totalW);
+				      hDileptonWWLevel_Diff   ->Fill(ptll,      totalW);
+				      hMinvWWLevel_Diff       ->Fill(mll,       totalW);
+				      hDeltaPhiWWLevel_Diff   ->Fill(dphill,    totalW);
+				      
+				      //if ( (pass2012ICHEP1 && !pass2012ICHEP2) || (!pass2012ICHEP1 && pass2012ICHEP2))    
+				      h_WWLevel_TightFailEvents ->Fill(1, totalW); 
+				      
+				      if ( (pass2012ICHEP1 && pass2012ICHEP2)) 
+					h_WWLevel_TightTightEvents ->Fill(1, totalW); 
+				      
+				      if ( pass2012ICHEP1 || pass2012ICHEP2) 
+					h_WWLevel_TightLooseEvents ->Fill(1, totalW); 
+				      
 				    }
-				  }		      
-				}
+				  }
+				}		      
 			      }
 			    }
 			  }
 			}
 		      }
 		    }
-		    
-		    
-		    // Define Normalization Factor for MC samples 
-		    
-		    //------------------------------------------------------------------------------
-		    // Define weights
-		    //------------------------------------------------------------------------------
-		    
-		    float pileupweight = 1;
-		    
-		    //  if (!IsDATA)
-		    // pileupweight = fPUWeight->GetWeight(T_Event_nPU);
-		    
-		    
-		    
-		    
-		    double factN = 1;
-		    
-		    if (XSection > 0) factN = XSection * Luminosity / NEvents;
-		    
-		    
-		    //factN = factN*pileupweight;
-		    
-		    
-		    //------------------------------------------------------------------------------
-		    // Init variables
-		    //------------------------------------------------------------------------------
-		    
-		    
-		    }
+		  }
+		  
+		  
+		  // Define Normalization Factor for MC samples 
+		  
+		  //------------------------------------------------------------------------------
+		  // Define weights
+		  //------------------------------------------------------------------------------
+		  
+		  float pileupweight = 1;
+		  
+		  //  if (!IsDATA)
+		  // pileupweight = fPUWeight->GetWeight(T_Event_nPU);
+		  
+		  
+		  
+		  
+		  double factN = 1;
+		  
+		  if (XSection > 0) factN = XSection * Luminosity / NEvents;
+		  
+		  
+		  //factN = factN*pileupweight;
+		  
+		  
+		  //------------------------------------------------------------------------------
+		  // Init variables
+		  //------------------------------------------------------------------------------
+		  
+		  
+		}
 }// end inside Loop
 
 
@@ -744,8 +848,14 @@ void test::SetDataMembersAtTermination() {
   hWeffnJets    = ((TH1F*) FindOutput("hWeffnJets"));
   hWnBtaggedJets = ((TH1F*) FindOutput("hWnBtaggedJets"));
   hWeffnBtaggedJets = ((TH1F*) FindOutput("hWeffnBtaggedJets"));
+  hWnJetsBveto      = ((TH1F*) FindOutput("hWnJetsBveto"));
+  hWeffnJetsBveto   = ((TH1F*) FindOutput("hWeffnJetsBveto"));
+  hWnJetsBvetoAfterHt       = ((TH1F*) FindOutput("hWnJetsBvetoAfterHt"));
+  hWeffnJetsBvetoAfterHt    = ((TH1F*) FindOutput("hWeffnJetsBvetoAfterHt"));
 
-    
+  hWnJetsBvetoAfterHtHtPlus       = ((TH1F*) FindOutput("hWnJetsBvetoAfterHtHtPlus"));
+  hWeffnJetsBvetoAfterHtHtPlus    = ((TH1F*) FindOutput("hWeffnJetsBvetoAfterHtHtPlus"));
+
   hWDeltaPhiJet = ((TH1F*) FindOutput("hWDeltaPhiJet"));
   hWSoftMuVeto  = ((TH1F*) FindOutput("hWSoftMuVeto"));
   hWExtraLepton = ((TH1F*) FindOutput("hWExtraLepton"));
@@ -774,7 +884,7 @@ void test::SetDataMembersAtTermination() {
   hPtDiLeptonWWLevel[qq]      = ((TH1F*) FindOutput("hPtDiLeptonWWLevel%.1i",qq));
   hMinvWWLevel[qq]            = ((TH1F*) FindOutput("hMinvWWLevel%.1i",qq));     // %.1i",qq 
   hMtWWLevel[qq]              = ((TH1F*) FindOutput("hMtWWLevel%.1i",qq));
-  hNJets30WWLevel[qq]         = ((TH1F*) FindOutput("hNJetsPF30WWLevel%.1i",qq));
+  hNJets30WWLevel[qq]         = ((TH1F*) FindOutput("hNJets30WWLevel%.1i",qq));
   hpfMetWWLevel[qq]           = ((TH1F*) FindOutput("hpfMetWWLevel%.1i",qq));
   hppfMetWWLevel[qq]          = ((TH1F*) FindOutput("hppfMetWWLevel%.1i",qq));
   hchMetWWLevel[qq]           = ((TH1F*) FindOutput("hchMetWWLevel%.1i",qq));
@@ -785,7 +895,28 @@ void test::SetDataMembersAtTermination() {
   hDPhiPtllJetWWLevel[qq]     = ((TH1F*) FindOutput("hDPhiPtllJetWWLevel%.1i",qq));
   hDataEvents[qq]             = ((TH1F*) FindOutput("hDataEvents%.1i",qq));
   hBackgroundEvents[qq]       = ((TH1F*) FindOutput("hBackgroundEvents%.1i",qq));
-
+  hMtLepton1WWLevel[qq]       = ((TH1F*) FindOutput("hMtLepton1WWLevel%.1i",qq));
+  hMtLepton2WWLevel[qq]       = ((TH1F*) FindOutput("hMtLepton2WWLevel%.1i",qq));
+  
+  hPtLepton1WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hPtLepton1WWLevelHtPlus%.1i",qq));
+  hPtLepton2WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hPtLepton2WWLevelHtPlus%.1i",qq));
+  hPtDiLeptonWWLevelHtPlus[qq]      = ((TH1F*) FindOutput("hPtDiLeptonWWLevelHtPlus%.1i",qq));
+  hMinvWWLevelHtPlus[qq]            = ((TH1F*) FindOutput("hMinvWWLevelHtPlus%.1i",qq));     // HtPlus%.1i",qq 
+  hMtWWLevelHtPlus[qq]              = ((TH1F*) FindOutput("hMtWWLevelHtPlus%.1i",qq));
+  hNJets30WWLevelHtPlus[qq]         = ((TH1F*) FindOutput("hNJets30WWLevelHtPlus%.1i",qq));
+  hpfMetWWLevelHtPlus[qq]           = ((TH1F*) FindOutput("hpfMetWWLevelHtPlus%.1i",qq));
+  hppfMetWWLevelHtPlus[qq]          = ((TH1F*) FindOutput("hppfMetWWLevelHtPlus%.1i",qq));
+  hchMetWWLevelHtPlus[qq]           = ((TH1F*) FindOutput("hchMetWWLevelHtPlus%.1i",qq));
+  hpchMetWWLevelHtPlus[qq]          = ((TH1F*) FindOutput("hpchMetWWLevelHtPlus%.1i",qq));
+  hpminMetWWLevelHtPlus[qq]         = ((TH1F*) FindOutput("hpminMetWWLevelHtPlus%.1i",qq));
+  hDeltaRLeptonsWWLevelHtPlus[qq]   = ((TH1F*) FindOutput("hDeltaRLeptonsWWLevelHtPlus%.1i",qq));
+  hDeltaPhiLeptonsWWLevelHtPlus[qq] = ((TH1F*) FindOutput("hDeltaPhiLeptonsWWLevelHtPlus%.1i",qq));
+  hDPhiPtllJetWWLevelHtPlus[qq]     = ((TH1F*) FindOutput("hDPhiPtllJetWWLevelHtPlus%.1i",qq));
+  hDataEventsHtPlus[qq]             = ((TH1F*) FindOutput("hDataEventsHtPlus%.1i",qq));
+  hBackgroundEventsHtPlus[qq]       = ((TH1F*) FindOutput("hBackgroundEventsHtPlus%.1i",qq));
+  hMtLepton1WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hMtLepton1WWLevelHtPlus%.1i",qq));
+  hMtLepton2WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hMtLepton2WWLevelHtPlus%.1i",qq));
+  
   hPtLepton1WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hPtLepton1WWLevelNoHt%.1i",qq));
   hPtLepton2WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hPtLepton2WWLevelNoHt%.1i",qq));
   hPtDiLeptonWWLevelNoHt[qq]      = ((TH1F*) FindOutput("hPtDiLeptonWWLevelNoHt%.1i",qq));
@@ -802,12 +933,20 @@ void test::SetDataMembersAtTermination() {
   hDPhiPtllJetWWLevelNoHt[qq]     = ((TH1F*) FindOutput("hDPhiPtllJetWWLevelNoHt%.1i",qq));
   hDataEventsNoHt[qq]             = ((TH1F*) FindOutput("hDataEventsNoHt%.1i",qq));
   hBackgroundEventsNoHt[qq]       = ((TH1F*) FindOutput("hBackgroundEventsNoHt%.1i",qq));
+  hMtLepton1WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hMtLepton1WWLevelNoHt%.1i",qq));
+  hMtLepton2WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hMtLepton2WWLevelNoHt%.1i",qq));
 
   hHt[qq]                     = ((TH1F*) FindOutput("hHt%.1i",qq));
   hHtAfter[qq]                = ((TH1F*) FindOutput("hHtAfter%.1i",qq));
+
+  mllVSmt[qq]                 = ((TH2F*) FindOutput("mllVSmt%.1i",qq));
+
+  hEff[qq]                    = ((TH1F*) FindOutput("hEff%.1i",qq));
+  hEffHtPlus[qq]              = ((TH1F*) FindOutput("hEffHtPlus%.1i",qq));
+  hEffNoHt[qq]                = ((TH1F*) FindOutput("hEffNoHt%.1i",qq));
  }
 
-  h_WWLevel_TightFailEvents = ((TH1F*) FindOutput("h_WWLevel_TightFailEvents"));
+  h_WWLevel_TightFailEvents  = ((TH1F*) FindOutput("h_WWLevel_TightFailEvents"));
   h_WWLevel_TightTightEvents = ((TH1F*) FindOutput("h_WWLevel_TightTightEvents"));
   h_WWLevel_TightLooseEvents = ((TH1F*) FindOutput("h_WWLevel_TightLooseEvents"));
 
@@ -832,9 +971,13 @@ void test::SetDataMembersAtTermination() {
   h_TwoLeptons_TightFailEvents  = ((TH1F*) FindOutput("h_TwoLeptons_TightFailEvents"));
   h_TwoLeptons_TightTightEvents = ((TH1F*) FindOutput("h_TwoLeptons_TightTightEvents"));
   h_TwoLeptons_TightLooseEvents = ((TH1F*) FindOutput("h_TwoLeptons_TightLooseEvents"));
+  /*
+  hEff                          = ((TH1F*) FindOutput("hEff"));
+  hEffHt                        = ((TH1F*) FindOutput("hEffHt"));
 
-
-
+  hEff0bin                          = ((TH1F*) FindOutput("hEff0bin"));
+  hEffHt0bin                        = ((TH1F*) FindOutput("hEffHt0bin"));
+  */
 
   // Dilepton level differential histograms   
   //----------------------------------------------------------------------------   
@@ -862,9 +1005,6 @@ void test::SetDataMembersAtTermination() {
   hDileptonWWLevel_Diff  = ((TH1F*) FindOutput("hDileptonWWLevel_Diff"));
   hMinvWWLevel_Diff  = ((TH1F*) FindOutput("hMinvWWLevel_Diff"));
   hDeltaPhiWWLevel_Diff  = ((TH1F*) FindOutput("hDeltaPhiWWLevel_Diff"));
-
-
-
 
   // Data-driven methods: Z+jets       
   //----------------------------------------------------------------------------  

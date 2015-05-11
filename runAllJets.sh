@@ -17,7 +17,9 @@ CHANNELS="OF"
 #"All SF OF EE MuE EMu MuMu "
 
 
-SAMPLES="          \
+SAMPLES="
+TTbarInclusiveMC   \
+WJetsMC            \
 DataRun2012_Total  \
 ggWWto2L           \
 WWTo2L2Nu          \
@@ -38,13 +40,21 @@ HWW125             \
 VVV                \
 WJets              \
 WJetsFakes_Total   \
-WWTo2L2Nu_pow_nnll \
-WW_pow_nnll        \
 WWTo2L2Nu_nonSkim_pow \
-WWTo2L2Nu_mcnlo_nnll  \
-WWTo2L2Nu_mad_nnll \
 Top                \
 "
+
+#WWTo2L2Nu_pow_nnll \
+#WW_pow_nnll        \
+#WWTo2L2Nu_mcnlo_nnll  \
+#WWTo2L2Nu_mad_nnll \
+#"
+
+
+
+
+
+
 
 #rm -rf rootfiles/${NJETS}jet
 

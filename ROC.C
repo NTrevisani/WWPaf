@@ -9,7 +9,7 @@
 #include "TGraph.h"
 
 
-int ROC(){
+int ROC(TString variable = "hMtSumWWLevel3"){
   //signal files
   TFile *fsig1 = new TFile("rootFiles/AllJet/OF/WWTo2L2Nu_pow_nnll.root","read");
   TFile *fsig2 = new TFile("rootFiles/AllJet/OF/ggWWto2L.root","read");
@@ -29,6 +29,22 @@ int ROC(){
   TFile *fbkg12 = new TFile("rootFiles/AllJet/OF/HWW125.root","read");
   TFile *fbkg13 = new TFile("rootFiles/AllJet/OF/VBF.root","read");
 
+  //defining names
+  TString name[13];
+  name[0] = "VBF";
+  name[1] = "TTbar";
+  name[2] = "TW";
+  name[3] = "WZ";
+  name[4] = "ZZ";
+  name[5] = "WgammaNoStar";
+  name[6] = "WgammaStar";
+  name[7] = "WJets";
+  name[8] = "DY";
+  name[9] = "DYtautau";
+  name[10] = "Zgamma";
+  name[11] = "VVV";
+  name[12] = "HWW125";
+
   //defining graphs
   TGraph *g = new TGraph();
   TGraph *g2 = new TGraph();
@@ -36,25 +52,25 @@ int ROC(){
   TGraph *g4 = new TGraph();
 
   //defining signal histograms
-  TH1F* hsig1 = (TH1F*)fsig1 -> Get("hHtAfter3");
-  TH1F* hsig2 = (TH1F*)fsig2 -> Get("hHtAfter3");
+  TH1F* hsig1 = (TH1F*)fsig1 -> Get(variable);
+  TH1F* hsig2 = (TH1F*)fsig2 -> Get(variable);
 
   //defining background histograms
   TH1F *hbkg[13];
 
-  hbkg[0]  = (TH1F*)fbkg13 -> Get("hHtAfter3");
-  hbkg[1]  = (TH1F*)fbkg1 -> Get("hHtAfter3");
-  hbkg[2]  = (TH1F*)fbkg2 -> Get("hHtAfter3");
-  hbkg[3]  = (TH1F*)fbkg3 -> Get("hHtAfter3");
-  hbkg[4]  = (TH1F*)fbkg4 -> Get("hHtAfter3");
-  hbkg[5]  = (TH1F*)fbkg5 -> Get("hHtAfter3");
-  hbkg[6]  = (TH1F*)fbkg6 -> Get("hHtAfter3");
-  hbkg[7]  = (TH1F*)fbkg7 -> Get("hHtAfter3");
-  hbkg[8]  = (TH1F*)fbkg8 -> Get("hHtAfter3");
-  hbkg[9]  = (TH1F*)fbkg9 -> Get("hHtAfter3");
-  hbkg[10]  = (TH1F*)fbkg10 -> Get("hHtAfter3");
-  hbkg[11]  = (TH1F*)fbkg11 -> Get("hHtAfter3");
-  hbkg[12]  = (TH1F*)fbkg12 -> Get("hHtAfter3");
+  hbkg[0]  = (TH1F*)fbkg13 -> Get(variable);
+  hbkg[1]  = (TH1F*)fbkg1 -> Get(variable);
+  hbkg[2]  = (TH1F*)fbkg2 -> Get(variable);
+  hbkg[3]  = (TH1F*)fbkg3 -> Get(variable);
+  hbkg[4]  = (TH1F*)fbkg4 -> Get(variable);
+  hbkg[5]  = (TH1F*)fbkg5 -> Get(variable);
+  hbkg[6]  = (TH1F*)fbkg6 -> Get(variable);
+  hbkg[7]  = (TH1F*)fbkg7 -> Get(variable);
+  hbkg[8]  = (TH1F*)fbkg8 -> Get(variable);
+  hbkg[9]  = (TH1F*)fbkg9 -> Get(variable);
+  hbkg[10]  = (TH1F*)fbkg10 -> Get(variable);
+  hbkg[11]  = (TH1F*)fbkg11 -> Get(variable);
+  hbkg[12]  = (TH1F*)fbkg12 -> Get(variable);
   
   //total number of signal events (no cuts applied)
   Float_t totSig = hsig1->Integral(0.,3000.) + hsig2->Integral(0.,3000.);
@@ -93,6 +109,67 @@ int ROC(){
     g3->SetPoint(i, i, effSig);
     g4->SetPoint(i, i, 1. - effBkg);
   }
+
+  TCanvas *cb = new TCanvas("cb","cb",600.,600.);
+  cb -> cd();
+
+  TPad *padb = new TPad("padb","padb",0.,0.,1.,1.);
+  padb->SetLeftMargin(0.15);
+  padb->SetRightMargin(0.15);
+  padb->SetBottomMargin(0.15);
+  padb->Draw();
+  padb->cd();
+
+  hsig1 -> Rebin(10);
+  hsig1 -> Scale (1. / hsig1 -> Integral());
+  hsig1 -> GetYaxis()->SetRangeUser(0.,0.120);
+  hsig1 -> SetLineWidth(5);
+  hsig1 -> SetStats(0);
+
+  hsig1 -> GetXaxis()->SetTitle("m_{T} [GeV]");
+  hsig1 -> SetTitle("Normalized Distributions for the Sum of Leptons p_{T}");
+  hsig1->GetXaxis()->SetTitleSize(0.05);
+  hsig1->GetXaxis()->SetTitleOffset(1.2);
+  hsig1->GetXaxis()->SetLabelSize(0.05);
+  hsig1->GetYaxis()->SetTitleOffset(1.4);
+  hsig1->GetYaxis()->SetTitleSize(0.05);
+  hsig1->GetYaxis()->SetLabelSize(0.05);
+  hsig1->GetXaxis()->SetNdivisions(5,10,20);
+
+  hsig1 -> Draw();
+
+  TLegend* legb = new TLegend(0.60,0.55,0.75,0.85);
+  legb->SetTextSize(0.04);
+  legb->SetFillColor(kWhite);
+  legb->SetLineColor(kWhite);
+
+  legb -> AddEntry(hsig1,"signal","l");
+
+  for(int b = 0; b < 12; ++b){
+    if(b == 0) continue;
+    if(b == 2) continue;
+    if(b == 3) continue;
+    if(b == 4) continue;
+    if(b == 5) continue;
+    if(b == 6) continue;
+    if(b == 8) continue;
+    if(b == 9) continue;
+    if(b == 10) continue;
+    if(b == 11) continue;
+    if(b == 12) continue;
+    hbkg[b] -> Rebin(10);
+    hbkg[b] -> SetStats(0);
+    hbkg[b] -> SetLineWidth(5);
+    hbkg[b] -> Scale (1. / hbkg[b] -> Integral());
+    hbkg[b] -> GetYaxis()->SetRangeUser(0.,0.2);
+    hbkg[b] -> SetLineColor(b + 1);
+    if ( b == 9 )
+      hbkg[b] -> SetLineColor(28);
+    legb -> AddEntry(hbkg[b], name[b],"l");
+    cout<<hbkg[b]->GetTitle()<<endl;
+    hbkg[b] -> Draw("same");
+  }
+  legb->Draw();
 
   g->SetTitle("ROC");
   g->GetXaxis()->SetTitle("Signal Efficiency");
@@ -166,7 +243,7 @@ int ROC(){
   pad1->cd();
 
   g->Draw("AL");
-  p->Draw("Psame");
+  //p->Draw("Psame");
 
   c1->Print("RocAll.pdf","pdf");  
 

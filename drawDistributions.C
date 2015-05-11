@@ -32,6 +32,7 @@ process[iZg]    = "Zgamma";
 process[iVVV]   = "VVV";
 process[iH125]  = "HWW125";
 process[iVBF]   = "VBF";
+//process[ittFakes]   = "TTBarInclusiveMC";
 
 
 
@@ -53,7 +54,7 @@ color[iZg]    = kAzure-2;
 color[iVVV]   = kAzure-2;
 color[iH125]  = kRed;
 color[iVBF]   = kBlack;
-
+//color[ittFakes]    = kGray+1;
 
 
 // Relative errors directly from data cards (in %) 
@@ -244,6 +245,15 @@ void drawDistributions(Int_t    njet       = 0,
 
       sprintf(name,"hHtAfter%d",_nje);
       DrawHistogram(name, "Ht"             , 10, 1, "GeV",nj.Data(),0.,500.);
+
+      sprintf(name,"hMtLepton1WWLevel%d",_nje);
+      DrawHistogram(name, "m_{T}"           , 10, 1, "GeV",nj.Data(),0.,200.);
+
+      sprintf(name,"hMtLepton2WWLevel%d",_nje);
+      DrawHistogram(name, "m_{T}"           , 10, 1, "GeV",nj.Data(),0.,200.);
+
+      sprintf(name,"hMtSumWWLevel%d",_nje);
+      DrawHistogram(name, "m_{T}"           , 10, 1, "GeV",nj.Data(),0.,350.);
     }
     DrawHistogram("hWnJets", "number of jets",  1, 1,"","",0.,8.);
     DrawHistogram("hWnBtaggedJets", "number of jets",  1, 1,"","",0.,8.);
@@ -264,6 +274,7 @@ void drawDistributions(Int_t    njet       = 0,
     systError[iDYtau] = 0.; // ?
     systError[iH125]  = 0.; // 7.4%
     systError[iVBF]   = 0.; // ?
+    //    systError[ittFakes]   = 0.; // ?
 
     _setLogy = false;
 
@@ -395,6 +406,7 @@ void DrawHistogram(TString  hname,
   systError[iVVV]    = Systematics [VVV+defineChannel]/ 1e2;
   systError[iH125]   = Systematics [ggH+defineChannel]/ 1e2;
   systError[iVBF]    = Systematics [ggH+defineChannel]/ 1e2;
+  //  systError[ittFakes]    = Systematics [ggH+defineChannel]/ 1e2;
 
 
   // All MC
@@ -490,8 +502,13 @@ void DrawHistogram(TString  hname,
   // Draw
   //----------------------------------------------------------------------------
   xaxis->SetRangeUser(xmin, xmax);
-  yaxis->SetRangeUser(0., 6.);//hist[iData]->GetBinContent(hist[iData]->GetMaximumBin()));
 
+  //  Float_t yrange = max(hist[iData]->GetBinContent(hist[iData]->GetMaximumBin()),);
+  //  yaxis->SetRangeUser(0., 1.6*yrange);
+
+  //  cout<<hist[iData]->GetBinContent(hist[iData]->GetMaximumBin())<<endl;
+
+  
   hist[iData]->Draw("ep");
 
   hstack     ->Draw("hist,same");
@@ -501,10 +518,10 @@ void DrawHistogram(TString  hname,
 
   // Adjust scale
   //----------------------------------------------------------------------------
-  Float_t theMax   = GetMaximumIncludingErrors(hist[iData], xmin, xmax);
-  Float_t theMaxMC = GetMaximumIncludingErrors(allmc,       xmin, xmax);
+  Float_t theMax   = GetMaximumIncludingErrors(hist[iData]);
+  Float_t theMaxMC = GetMaximumIncludingErrors(allmc);
 
-  if (theMaxMC > theMax) theMax = theMaxMC;
+  //  if (theMaxMC > theMax) theMax = theMaxMC;
 
   if (pad1->GetLogy()) {
 
@@ -512,7 +529,7 @@ void DrawHistogram(TString  hname,
 
     hist[iData]->SetMinimum(0.05);
   }
-  else theMax *= 1.55;
+  else theMax *= 1.75;
 
   hist[iData]->SetMaximum(theMax);
 
@@ -634,25 +651,13 @@ void DrawHistogram(TString  hname,
 //------------------------------------------------------------------------------
 // GetMaximumIncludingErrors
 //------------------------------------------------------------------------------
-Float_t GetMaximumIncludingErrors(TH1F*    h,
-				  Double_t xmin,
-				  Double_t xmax)
+Float_t GetMaximumIncludingErrors(TH1F*    h)
+
 {
-  UInt_t nbins = h->GetNbinsX();
-
-  TAxis* axis = (TAxis*)h->GetXaxis();
+  Float_t maxWithErrors = 0;  
   
-  Int_t firstBin = (xmin != -999) ? axis->FindBin(xmin) : 1;
-  Int_t lastBin  = (xmax != -999) ? axis->FindBin(xmax) : nbins;
-
-  Float_t maxWithErrors = 0;
-
-  for (Int_t i=firstBin; i<=lastBin; i++) {
-
-    Float_t binHeight = h->GetBinContent(i) + h->GetBinError(i);
-
-    if (binHeight > maxWithErrors) maxWithErrors = binHeight;
-  }
+  Float_t binHeight = h->GetBinContent(h->GetMaximumBin());// + h->GetBinError(h->GetMaximumBin());
+  if (binHeight > maxWithErrors) maxWithErrors = binHeight;
 
   return maxWithErrors;
 }
