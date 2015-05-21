@@ -124,7 +124,7 @@ void test::Initialise() {
     hPtDiLeptonWWLevel[nC]      = CreateH1F(Form("hPtDiLeptonWWLevel%.1i", nC),      "", 200, 0, 200);
     hMinvWWLevel[nC]            = CreateH1F(Form("hMinvWWLevel%.1i", nC),            "", 200, 0, 200);
     hMtWWLevel[nC]              = CreateH1F(Form("hMtWWLevel%.1i", nC),              "", 250, 0, 250);
-    hNJets30WWLevel[nC]         = CreateH1F(Form("hNJets30WWLevel%.1i", nC),       "",  10, 0,  10);
+    hNJets30WWLevel[nC]         = CreateH1F(Form("hNJets30WWLevel%.1i", nC),         "",  10, 0,  10);
     hpfMetWWLevel[nC]           = CreateH1F(Form("hpfMetWWLevel%.1i", nC),           "", 150, 0, 150);
     hppfMetWWLevel[nC]          = CreateH1F(Form("hppfMetWWLevel%.1i", nC),          "", 150, 0, 150);
     hchMetWWLevel[nC]           = CreateH1F(Form("hchMetWWLevel%.1i", nC),           "", 150, 0, 150);
@@ -138,13 +138,14 @@ void test::Initialise() {
     hMtLepton1WWLevel[nC]       = CreateH1F(Form("hMtLepton1WWLevel%.1i", nC),       "", 200, 0, 200);
     hMtLepton2WWLevel[nC]       = CreateH1F(Form("hMtLepton2WWLevel%.1i", nC),       "", 200, 0, 200);
     hMtSumWWLevel[nC]           = CreateH1F(Form("hMtSumWWLevel%.1i", nC),           "", 500, 0, 500);
+    hPtWW[nC]                   = CreateH1F(Form("hPtWW%.1i", nC),                   "", 2500, 0, 2500);
     
     hPtLepton1WWLevelHtPlus[nC]       = CreateH1F(Form("hPtLepton1WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
     hPtLepton2WWLevelHtPlus[nC]       = CreateH1F(Form("hPtLepton2WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
     hPtDiLeptonWWLevelHtPlus[nC]      = CreateH1F(Form("hPtDiLeptonWWLevelHtPlus%.1i", nC),      "", 200, 0, 200);
     hMinvWWLevelHtPlus[nC]            = CreateH1F(Form("hMinvWWLevelHtPlus%.1i", nC),            "", 200, 0, 200);
     hMtWWLevelHtPlus[nC]              = CreateH1F(Form("hMtWWLevelHtPlus%.1i", nC),              "", 250, 0, 250);
-    hNJets30WWLevelHtPlus[nC]         = CreateH1F(Form("hNJets30WWLevelHtPlus%.1i", nC),       "",  10, 0,  10);
+    hNJets30WWLevelHtPlus[nC]         = CreateH1F(Form("hNJets30WWLevelHtPlus%.1i", nC),         "",  10, 0,  10);
     hpfMetWWLevelHtPlus[nC]           = CreateH1F(Form("hpfMetWWLevelHtPlus%.1i", nC),           "", 150, 0, 150);
     hppfMetWWLevelHtPlus[nC]          = CreateH1F(Form("hppfMetWWLevelHtPlus%.1i", nC),          "", 150, 0, 150);
     hchMetWWLevelHtPlus[nC]           = CreateH1F(Form("hchMetWWLevelHtPlus%.1i", nC),           "", 150, 0, 150);
@@ -157,7 +158,8 @@ void test::Initialise() {
     hBackgroundEventsHtPlus[nC]       = CreateH1F(Form("hBackgroundEventsHtPlus%.1i", nC),       "",  32, 0, 3.2);
     hMtLepton1WWLevelHtPlus[nC]       = CreateH1F(Form("hMtLepton1WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
     hMtLepton2WWLevelHtPlus[nC]       = CreateH1F(Form("hMtLepton2WWLevelHtPlus%.1i", nC),       "", 200, 0, 200);
-    
+    hPtWWHtPlus[nC]                   = CreateH1F(Form("hPtWWHtPlus%.1i", nC),                   "", 2500, 0, 2500);    
+
     hPtLepton1WWLevelNoHt[nC]       = CreateH1F(Form("hPtLepton1WWLevelNoHt%.1i", nC),       "", 200, 0, 200);
     hPtLepton2WWLevelNoHt[nC]       = CreateH1F(Form("hPtLepton2WWLevelNoHt%.1i", nC),       "", 200, 0, 200);
     hPtDiLeptonWWLevelNoHt[nC]      = CreateH1F(Form("hPtDiLeptonWWLevelNoHt%.1i", nC),      "", 200, 0, 200);
@@ -177,7 +179,9 @@ void test::Initialise() {
     hMtLepton1WWLevelNoHt[nC]       = CreateH1F(Form("hMtLepton1WWLevelNoHt%.1i", nC),       "", 500, 0, 500);
     hMtLepton2WWLevelNoHt[nC]       = CreateH1F(Form("hMtLepton2WWLevelNoHt%.1i", nC),       "", 500, 0, 500);
     hMtSumWWLevelNoHt[nC]           = CreateH1F(Form("hMtSumWWLevelNoHt%.1i", nC),           "", 500, 0, 500);
+    hPtWWNoHt[nC]                   = CreateH1F(Form("hPtWWNoHt%.1i", nC),                   "", 2500, 0, 2500);
 
+    hPtWWNoBtagging[nC]         = CreateH1F(Form("hPtWWNoBtagging%.1i",   nC),       "", 3000, 0, 3000);
     hHt[nC]                     = CreateH1F(Form("hHt%.1i",               nC),       "", 3000, 0, 3000);
     hHtAfter[nC]                = CreateH1F(Form("hHtAfter%.1i",          nC),       "", 3000, 0, 3000);
     mllVSmt[nC]                 = CreateH2F(Form("mllVSmt%.1i",           nC),       "", 300,  0, 3000,50,0.,500.);
@@ -296,12 +300,16 @@ void test::InsideLoop() {
   Double_t mybaseW = 1;
   
   if ( TheSample.Contains("_nnll") ) {
-    if ( TheSample.Contains("_pow_") ) mybaseW = 5984.0/999864*1.04976; 
-    if ( TheSample.Contains("_mad_") ) mybaseW = 5984.0/1933235*1.04976;
-    if ( TheSample.Contains("_mcnlo_") ) mybaseW = 5984.0/539594*1.04976;
+    if ( TheSample.Contains("_pow_") ) mybaseW = 5984.0/999864*1.04976*0.97; 
+    if ( TheSample.Contains("_mad_") ) mybaseW = 5984.0/1933235*1.04976*0.97;
+    if ( TheSample.Contains("_mcnlo_") ) mybaseW = 5984.0/539594*1.04976*0.97;
   }
+
+    
+  if ( TheSample == "ggWWto2L")
+    mybaseW = 5984.0/109987*1.04976*0.03;   //109987
   
-  
+
   if ( TheSample == "TTbar"){
     mybaseW = 25289.0/10783509 * 1.04976;
   }
@@ -390,7 +398,18 @@ void test::InsideLoop() {
   Float_t Mt2 = sqrt(2*pt2*pfmet*(1 - cos(dphilmet2)));  
   
   //    if (njet == 3) jetbin = 2;  
-  
+
+  //building ptWW
+  TLorentzVector L1,L2;
+  TLorentzVector MET;
+  Float_t ptWW = 0;
+
+  if (pt1>0 && pt2>0) {  
+    L1.SetPtEtaPhiM(pt1, 0, phi1, 0.);
+    L2.SetPtEtaPhiM(pt2, 0, phi2, 0.);
+    MET.SetPtEtaPhiM(pfmet, 0, pfmetphi, 0.);
+    ptWW = (L1+L2+MET).Pt();
+  }
   
   Int_t vbfsel = ((jetpt3 <= 30 || !(jetpt3 > 30 && ((jeteta1-jeteta3 > 0 && jeteta2-jeteta3 < 0) || (jeteta2-jeteta3 > 0 && jeteta1-jeteta3 < 0)))));
 
@@ -613,11 +632,13 @@ void test::InsideLoop() {
 				    if (jetbin >= 3) jetbin = 2;
 				    if(jetNumber == jetbin){
 				      hHt[jetNumber]->Fill(Ht,totalW);				    
+				      hPtWWNoBtagging[jetNumber]->Fill(ptWW,totalW);
 				    }
 				  }
 				  
 				  hHt[3]->Fill(Ht,totalW);				    
-				  
+				  hPtWWNoBtagging[3]->Fill(ptWW,totalW);
+
 				  //b-veto
 				  if (bveto_ip==1 && nbjettche==0) {
 				    
@@ -652,7 +673,8 @@ void test::InsideLoop() {
 				      hMtLepton1WWLevelNoHt[3]      ->Fill(Mt1,       totalW);
 				      hMtLepton2WWLevelNoHt[3]      ->Fill(Mt2,       totalW);
 				      hMtSumWWLevelNoHt[3]          ->Fill(Mt1 + Mt2, totalW);
-				      
+				      hPtWWNoHt[3]                  ->Fill(ptWW,      totalW);
+
 				      //bveto Ht 
 				      if(Ht < 250){
 					hPtLepton1WWLevel[3]      ->Fill(pt1,       totalW);
@@ -676,6 +698,7 @@ void test::InsideLoop() {
 					hMtLepton2WWLevel[3]      ->Fill(Mt2,       totalW);
 					hMtSumWWLevel[3]          ->Fill(Mt1 + Mt2, totalW);
 					mllVSmt[3]                ->Fill(mll, Mt1 + Mt2, totalW);
+					hPtWW[3]                  ->Fill(ptWW,      totalW);
 				      }
 				      
 				      if(Ht > 250){
@@ -698,6 +721,7 @@ void test::InsideLoop() {
 					hEffHtPlus[3]                   ->Fill(1,    efficiencyW);					
 					hMtLepton1WWLevelHtPlus[3]      ->Fill(Mt1,       totalW);
 					hMtLepton2WWLevelHtPlus[3]      ->Fill(Mt2,       totalW);
+					hPtWWHtPlus[3]                  ->Fill(ptWW,      totalW);
 					}
 				      
 				      for (Int_t jetNumber = 0; jetNumber < 3 ; ++jetNumber){
@@ -723,6 +747,7 @@ void test::InsideLoop() {
 					  hMtLepton2WWLevelNoHt[jetNumber]      ->Fill(Mt2,       totalW);
 					  hMtSumWWLevelNoHt[jetNumber]          ->Fill(Mt1 + Mt2, totalW);
 					  hEffNoHt[jetNumber]                   ->Fill(1,    efficiencyW);
+					  hPtWWNoHt[jetNumber]                  ->Fill(ptWW,      totalW);
 
 					  //bveto Ht  
 					  if(Ht < 250){
@@ -745,6 +770,7 @@ void test::InsideLoop() {
 					    hMtSumWWLevel[jetNumber]          ->Fill(Mt1 + Mt2, totalW);
 					    mllVSmt[jetNumber]                ->Fill(mll, Mt1 + Mt2, totalW);
 					    hEff[jetNumber]                   ->Fill(1,    efficiencyW);
+					    hPtWW[jetNumber]                  ->Fill(ptWW,      totalW);
 					  }
 					  
 					  if(Ht > 250){
@@ -765,6 +791,7 @@ void test::InsideLoop() {
 					    hMtLepton1WWLevelHtPlus[jetNumber]      ->Fill(Mt1,       totalW);
 					    hMtLepton2WWLevelHtPlus[jetNumber]      ->Fill(Mt2,       totalW);
 					    hEffHtPlus[jetNumber]                   ->Fill(1,    efficiencyW);
+					    hPtWWHtPlus[jetNumber]                  ->Fill(ptWW,      totalW);
 					    }
 					  
 					}
@@ -897,6 +924,7 @@ void test::SetDataMembersAtTermination() {
   hBackgroundEvents[qq]       = ((TH1F*) FindOutput("hBackgroundEvents%.1i",qq));
   hMtLepton1WWLevel[qq]       = ((TH1F*) FindOutput("hMtLepton1WWLevel%.1i",qq));
   hMtLepton2WWLevel[qq]       = ((TH1F*) FindOutput("hMtLepton2WWLevel%.1i",qq));
+  hPtWW[qq]                   = ((TH1F*) FindOutput("hPtWW%.1i",qq));
   
   hPtLepton1WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hPtLepton1WWLevelHtPlus%.1i",qq));
   hPtLepton2WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hPtLepton2WWLevelHtPlus%.1i",qq));
@@ -916,7 +944,8 @@ void test::SetDataMembersAtTermination() {
   hBackgroundEventsHtPlus[qq]       = ((TH1F*) FindOutput("hBackgroundEventsHtPlus%.1i",qq));
   hMtLepton1WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hMtLepton1WWLevelHtPlus%.1i",qq));
   hMtLepton2WWLevelHtPlus[qq]       = ((TH1F*) FindOutput("hMtLepton2WWLevelHtPlus%.1i",qq));
-  
+  hPtWWHtPlus[qq]                   = ((TH1F*) FindOutput("hPtWW%.1i",qq));
+
   hPtLepton1WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hPtLepton1WWLevelNoHt%.1i",qq));
   hPtLepton2WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hPtLepton2WWLevelNoHt%.1i",qq));
   hPtDiLeptonWWLevelNoHt[qq]      = ((TH1F*) FindOutput("hPtDiLeptonWWLevelNoHt%.1i",qq));
@@ -935,7 +964,9 @@ void test::SetDataMembersAtTermination() {
   hBackgroundEventsNoHt[qq]       = ((TH1F*) FindOutput("hBackgroundEventsNoHt%.1i",qq));
   hMtLepton1WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hMtLepton1WWLevelNoHt%.1i",qq));
   hMtLepton2WWLevelNoHt[qq]       = ((TH1F*) FindOutput("hMtLepton2WWLevelNoHt%.1i",qq));
+  hPtWWNoHt[qq]                   = ((TH1F*) FindOutput("hPtWW%.1i",qq));
 
+  hPtWWNoBtagging[qq]         = ((TH1F*) FindOutput("hPtWWNoBtagging%.1i",qq));
   hHt[qq]                     = ((TH1F*) FindOutput("hHt%.1i",qq));
   hHtAfter[qq]                = ((TH1F*) FindOutput("hHtAfter%.1i",qq));
 

@@ -14,6 +14,9 @@ TEST="test"
 NJETS=$1
 
 CHANNELS="OF"
+
+#PAFMODE="kCluster"
+
 #"All SF OF EE MuE EMu MuMu "
 
 
@@ -42,19 +45,11 @@ WJets              \
 WJetsFakes_Total   \
 WWTo2L2Nu_nonSkim_pow \
 Top                \
+WWTo2L2Nu_pow_nnll \
+WW_pow_nnll        \
+WWTo2L2Nu_mcnlo_nnll  \
+WWTo2L2Nu_mad_nnll \
 "
-
-#WWTo2L2Nu_pow_nnll \
-#WW_pow_nnll        \
-#WWTo2L2Nu_mcnlo_nnll  \
-#WWTo2L2Nu_mad_nnll \
-#"
-
-
-
-
-
-
 
 #rm -rf rootfiles/${NJETS}jet
 

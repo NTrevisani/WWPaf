@@ -35,7 +35,6 @@ process[iVBF]   = "VBF";
 //process[ittFakes]   = "TTBarInclusiveMC";
 
 
-
 Color_t color[nProcesses];
 
 color[iData]  = kBlack;
@@ -196,7 +195,7 @@ void drawDistributions(Int_t    njet       = 0,
     DrawHistogram("hbTagDisTopTaggedEvents",            "2^{nd} jet TCHE","", 5, 1, "NULL","", -999, -999, false);
   }
 
-
+  
   // PAS distributions
   //----------------------------------------------------------------------------
   if (1) {
@@ -223,7 +222,6 @@ void drawDistributions(Int_t    njet       = 0,
 
       sprintf(name,"hDeltaPhiLeptonsWWLevel%d",_nje);
       DrawHistogram(name, "#Delta#phi_{ll}",  1, 0, "rad",nj.Data());
-
       
       sprintf(name,"hPtLepton1WWLevelNoHt%d",_nje);
       DrawHistogram(name,  "p_{T}^{max}",           10, 0, "GeV",nj.Data(), 20, 200);
@@ -254,7 +252,20 @@ void drawDistributions(Int_t    njet       = 0,
 
       sprintf(name,"hMtSumWWLevel%d",_nje);
       DrawHistogram(name, "m_{T}"           , 10, 1, "GeV",nj.Data(),0.,350.);
+
+      sprintf(name,"hPtWW%d",_nje);
+      DrawHistogram(name, "p_{T}"           , 10, 1, "GeV",nj.Data(),0.,250.);
+
+      sprintf(name,"hPtWWNoHt%d",_nje);
+      DrawHistogram(name, "p_{T}"           , 10, 1, "GeV",nj.Data(),0.,250.);
+
+      sprintf(name,"hPtWWHtPlus%d",_nje);
+      DrawHistogram(name, "p_{T}"           , 10, 1, "GeV",nj.Data(),0.,250.);
+
+      sprintf(name,"hPtWWNoBtagging%d",_nje);
+      DrawHistogram(name, "p_{T}"           , 10, 1, "GeV",nj.Data(),0.,250.);
     }
+
     DrawHistogram("hWnJets", "number of jets",  1, 1,"","",0.,8.);
     DrawHistogram("hWnBtaggedJets", "number of jets",  1, 1,"","",0.,8.);
 
@@ -369,7 +380,7 @@ void DrawHistogram(TString  hname,
       if (_dataDriven && ip == itt)    hist[ip]->Scale(ttScale[_njet]);
       if (_dataDriven && ip == itW)    hist[ip]->Scale(tWScale[_njet]);
       if (_dataDriven && ip == iWW)    hist[ip]->Scale(WWScale[_njet]);
-      if (_dataDriven && ip == iqqWW)    hist[ip]->Scale(WWScale[_njet]);
+      if (_dataDriven && ip == iqqWW)  hist[ip]->Scale(WWScale[_njet]);
       if (_dataDriven && ip == iDY)    hist[ip]->Scale(ZjScale[_njet]);
       if (_dataDriven && ip == iDYtau) hist[ip]->Scale(ZjScale[_njet]);
 

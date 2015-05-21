@@ -21,7 +21,7 @@ void RunPROOF_test(double luminosity,
 		   const char* data, 
 		   TString  theSample,  
 		   Int_t JetChannel,
-		   TString FlavorChannel) 
+		   TString FlavorChannel)
 {
  
   // This loads all the PROOF Analysis Framework utilities
@@ -53,7 +53,7 @@ void RunPROOF_test(double luminosity,
   // * kLite: PROOF Lite mode
   // * kCluster: PROOF Cluster mode
   // * kPoD: PROOF on Demand mode
-  gPAFOptions->proofMode = kCluster;
+  gPAFOptions->proofMode = kCluster;//PAFmode;
   //
   // Optional parameters for PROOF Cluster (kCluster):
   //   + The number of slots you would like to use (default is 10)
